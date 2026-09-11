@@ -262,6 +262,9 @@ export async function queryProduct(itemId) {
   }
 
   try {
+    // 按商品 ID 精确查询必须走 taobao.tbk.item.info.get（商品详情接口）。
+    // 该接口需要淘宝客「商品详情」权限；若账号仅有物料搜索权限会报无权限，
+    // 此时会在下方 catch 里降级为演示数据并带上真实错误原因，方便用户对症申请权限。
     const payload = await callGateway('taobao.tbk.item.info.get', {
       num_iids: String(itemId),
       platform: '2',
@@ -374,12 +377,14 @@ export async function searchByKeyword(keyword, referenceTitle = '') {
 export async function probe() {
   if (!hasKeys()) throw new Error('未配置淘宝客密钥');
 
-  const params = { q: '手机', page_no: '1', page_size: '1' };
-  const adzone = adzoneId();
-  if (adzone) params.adzone_id = adzone;
-
-  const payload = await callGateway('taobao.tbk.dg.material.optional.upgrade', params);
-  extractMaterialItems(payload);
+  // 探测必须覆盖「按商品 ID 精确查详情」这条主链路（queryProduct 实际走的接口），
+  // 而不是只测物料搜索——否则会出现「探测说能用、真粘贴链接却降级」的假阳性。
+  const payload = await callGateway('taobao.tbk.item.info.get', {
+    num_iids: '675167771090',
+    platform: '2',
+    ip: '127.0.0.1',
+  });
+  extractItemList(payload, 'tbk_item_info_get_response');
 }
 
 export default {

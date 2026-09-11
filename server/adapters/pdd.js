@@ -264,13 +264,24 @@ export async function searchByKeyword(keyword, referenceTitle = '') {
 export async function probe() {
   if (!hasKeys()) throw new Error('未配置多多进宝密钥');
 
-  const payload = await callGateway('pdd.ddk.goods.search', {
-    keyword: '手机',
-    page: '1',
-    page_size: '10',
-  });
-  // 签名失败 / 权限不足会以 error_response 形式返回，这里必须抛出来
-  assertNoPddError(payload);
+  try {
+    const payload = await callGateway('pdd.ddk.goods.search', {
+      keyword: '手机',
+      page: '1',
+      page_size: '10',
+    });
+    // 签名失败 / 权限不足会以 error_response 形式返回，这里必须抛出来
+    assertNoPddError(payload);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    // 最常见的是没填推广位 PID：没有它搜索接口直接拒绝，不是密钥本身的问题
+    if (/pid|custom_parameters|授权备案/i.test(message)) {
+      throw new Error(
+        `缺少多多进宝推广位 PID：请在 .env 填入 PDD_PID（在多多进宝后台「推广位管理」创建，形如 1746425_xxx_xxx）后重试，与密钥无关`,
+      );
+    }
+    throw err;
+  }
 }
 
 export default {
