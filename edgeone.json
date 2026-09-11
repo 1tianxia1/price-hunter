@@ -1,0 +1,8 @@
+{
+  "name": "price-hunter",
+  "outputDirectory": "dist",
+  "cloudFunctions": {
+    "externalNodeModules": [],
+    "includeFiles": ["server/**", "package.json"]
+  }
+}

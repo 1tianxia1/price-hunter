@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "^/api$",
+      "isFramework": true
+    },
+    {
+      "src": "^/api/(.*)$",
+      "isFramework": true
+    }
+  ]
+}

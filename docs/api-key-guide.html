@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="ytxfNAzJrNdwCg9m13wdLp">
+<head data-page-node-id="L9AzFJLnfABcXTBBMt8DPB">
+<meta charset="UTF-8" data-page-node-id="340s5l4GIam24HVv8gKD4N">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="IEMuxlRNwCR4Y0FDOT3ar8">
+<title>PriceHunter · 联盟 API 密钥申请图文教程</title>
+<style>
+/* ============ 基础 ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#1f2328; --ink2:#3c444d; --muted:#6b7280;
+  --line:#e5e7eb; --line2:#eef0f3;
+  --brand:#2563eb; --brand-soft:#eff5ff;
+  --red:#e11d48; --red-soft:#fff1f4;
+  --green:#15803d; --green-soft:#ecfdf3;
+  --amber:#b45309; --amber-soft:#fffbeb;
+  --purple:#6d28d9; --purple-soft:#f5f1ff;
+  --radius:14px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px 90px}
+code,kbd,.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+
+/* ============ 页头 ============ */
+.hero{
+  background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#3b82f6 100%);
+  color:#fff; padding:44px 22px 40px; margin-bottom:34px;
+}
+.hero-in{max-width:980px;margin:0 auto}
+.hero .kicker{
+  display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(255,255,255,.16);padding:5px 12px;border-radius:99px;margin-bottom:16px;
+}
+.hero h1{font-size:31px;line-height:1.35;font-weight:750;letter-spacing:-.01em}
+.hero p.sub{margin-top:12px;font-size:15px;color:#dbeafe;max-width:760px}
+.hero-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+  padding:6px 13px;border-radius:8px;font-size:13px;
+}
+
+/* ============ 章节 ============ */
+section{margin-bottom:46px}
+h2{
+  font-size:23px;font-weight:720;letter-spacing:-.01em;
+  padding-bottom:12px;border-bottom:2px solid var(--line);margin-bottom:22px;
+  display:flex;align-items:center;gap:12px;
+}
+h2 .num{
+  flex:none;width:32px;height:32px;border-radius:9px;background:var(--brand);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;
+}
+h3{font-size:17px;font-weight:680;margin:26px 0 12px;display:flex;align-items:center;gap:9px}
+h3::before{content:"";width:4px;height:17px;border-radius:2px;background:var(--brand);flex:none}
+h4{font-size:15px;font-weight:660;margin:18px 0 8px;color:var(--ink2)}
+p{margin-bottom:12px}
+a{color:var(--brand)}
+ul,ol{margin:0 0 12px 22px}
+li{margin-bottom:6px}
+strong{font-weight:680}
+
+/* ============ 卡片 / 提示 ============ */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.note{border-radius:10px;padding:14px 17px;margin:14px 0;font-size:14px;line-height:1.7;border:1px solid}
+.note .t{font-weight:700;display:block;margin-bottom:4px}
+.note p:last-child,.note ul:last-child,.note ol:last-child{margin-bottom:0}
+.n-warn{background:var(--amber-soft);border-color:#fde68a;color:#7c2d12}
+.n-warn .t{color:var(--amber)}
+.n-danger{background:var(--red-soft);border-color:#fecdd3;color:#881337}
+.n-danger .t{color:var(--red)}
+.n-ok{background:var(--green-soft);border-color:#a7f3d0;color:#065f46}
+.n-ok .t{color:var(--green)}
+.n-info{background:var(--brand-soft);border-color:#c7d9fe;color:#1e3a8a}
+.n-info .t{color:var(--brand)}
+.n-unknown{background:#f5f5f4;border-color:#d6d3d1;color:#44403c}
+.n-unknown .t{color:#57534e}
+
+/* ============ 表格 ============ */
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
+th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+thead th{background:#fafbfc;font-weight:680;color:var(--ink2);white-space:nowrap;font-size:13px}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fcfcfd}
+td.mid{text-align:center}
+
+/* ============ 徽标 ============ */
+.tag{display:inline-block;padding:2px 9px;border-radius:6px;font-size:12px;font-weight:660;white-space:nowrap;line-height:1.7}
+.t-easy{background:#dcfce7;color:#15803d}
+.t-mid{background:#fef3c7;color:#b45309}
+.t-hard{background:#fee2e2;color:#b91c1c}
+.t-gray{background:#f1f5f9;color:#475569}
+.t-ok{background:#dbeafe;color:#1d4ed8}
+.t-no{background:#f1f5f9;color:#64748b}
+
+/* ============ 步骤条 ============ */
+.steps{counter-reset:s;list-style:none;margin:16px 0 0;padding:0}
+.steps>li{
+  counter-increment:s;position:relative;padding:0 0 18px 40px;margin:0;
+  border-left:2px solid var(--line);margin-left:13px;
+}
+.steps>li:last-child{border-left-color:transparent;padding-bottom:0}
+.steps>li::before{
+  content:counter(s);position:absolute;left:-14px;top:0;
+  width:27px;height:27px;border-radius:50%;background:var(--brand);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
+}
+.steps>li .sh{font-weight:680;font-size:14.5px;margin-bottom:3px}
+.steps>li .sb{font-size:14px;color:var(--ink2)}
+
+/* ============ 浏览器 Mockup ============ */
+.browser{
+  background:#fff;border:1px solid #d8dce3;border-radius:11px;overflow:hidden;
+  box-shadow:0 6px 22px rgba(16,24,40,.09);margin:16px 0 8px;
+}
+.b-bar{
+  background:linear-gradient(#f3f4f6,#e9ebef);border-bottom:1px solid #d8dce3;
+  padding:9px 12px;display:flex;align-items:center;gap:11px;
+}
+.dots{display:flex;gap:6px;flex:none}
+.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:#ff5f57}
+.dots i:nth-child(2){background:#febc2e}
+.dots i:nth-child(3){background:#28c840}
+.nav-arrows{display:flex;gap:9px;color:#9aa2ad;font-size:13px;flex:none}
+.omnibox{
+  flex:1;background:#fff;border:1px solid #d8dce3;border-radius:7px;
+  padding:4px 11px;font-size:12px;color:#4b5563;display:flex;align-items:center;gap:7px;
+  font-family:"SFMono-Regular",Consolas,Menlo,monospace;overflow:hidden;
+}
+.omnibox .lock{color:#15803d;font-size:11px}
+.omnibox .host{color:#111827;font-weight:640}
+.omnibox .path{color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-body{background:#fbfbfc;padding:0;min-height:120px}
+
+/* 顶部导航栏 mock */
+.m-topbar{
+  background:#fff;border-bottom:1px solid #eceef1;padding:0 16px;
+  display:flex;align-items:center;gap:18px;height:46px;font-size:13px;
+}
+.m-logo{font-weight:800;font-size:14.5px;color:#c8161d;flex:none;letter-spacing:-.02em}
+.m-logo.jd{color:#e1251b}
+.m-logo.tb{color:#ff5000}
+.m-logo.pdd{color:#e02e24}
+.m-logo.dtk{color:#ff4d6d}
+.m-nav{display:flex;gap:15px;color:#4b5563;flex-wrap:wrap}
+.m-nav b{color:#111827;font-weight:660}
+.m-me{margin-left:auto;display:flex;align-items:center;gap:7px;color:#6b7280;flex:none;font-size:12.5px}
+.m-avatar{width:24px;height:24px;border-radius:50%;background:#dbe3ec;display:flex;align-items:center;justify-content:center;font-size:11px;color:#64748b;font-weight:700}
+
+/* 布局：侧边栏 + 主区 */
+.m-layout{display:flex;min-height:200px}
+.m-side{
+  width:158px;flex:none;background:#fff;border-right:1px solid #eceef1;padding:9px 0;font-size:12.5px;
+}
+.m-side .sg{padding:5px 15px;color:#9aa2ad;font-size:11px;letter-spacing:.04em}
+.m-side .si{padding:6px 15px;color:#4b5563;display:flex;align-items:center;gap:6px}
+.m-side .si.on{background:#fff1f2;color:#be123c;font-weight:660;border-right:2px solid #e11d48}
+.m-side .si.sub{padding-left:27px;font-size:12px}
+.m-main{flex:1;padding:15px 17px;min-width:0}
+
+/* 标题行 + 主按钮 */
+.m-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px;flex-wrap:wrap}
+.m-title{font-size:15px;font-weight:700;color:#111827}
+.m-sub{font-size:12px;color:#9aa2ad;font-weight:400;margin-top:2px}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;padding:7px 15px;border-radius:7px;
+  font-size:13px;font-weight:640;border:1px solid transparent;white-space:nowrap;
+}
+.btn-red{background:#e1251b;color:#fff}
+.btn-orange{background:#ff5000;color:#fff}
+.btn-pdd{background:#e02e24;color:#fff}
+.btn-blue{background:#2563eb;color:#fff}
+.btn-ghost{background:#fff;color:#374151;border-color:#d1d5db}
+.btn-sm{padding:4px 10px;font-size:12px;border-radius:6px}
+.btn-link{background:none;color:#2563eb;padding:0;font-weight:600;font-size:12.5px}
+
+/* 表单 mock */
+.m-form{max-width:430px}
+.m-row{display:flex;align-items:center;margin-bottom:11px;gap:10px}
+.m-lb{width:88px;flex:none;text-align:right;font-size:12.5px;color:#4b5563}
+.m-lb .req{color:#e11d48}
+.m-input{
+  flex:1;background:#fff;border:1px solid #d9dde3;border-radius:6px;padding:6px 10px;
+  font-size:12.5px;color:#9aa2ad;min-height:31px;display:flex;align-items:center;
+}
+.m-input.filled{color:#111827}
+.m-input.sel{justify-content:space-between}
+.m-input.sel::after{content:"▾";color:#9aa2ad;font-size:10px}
+.m-form-act{display:flex;gap:9px;justify-content:flex-end;margin-top:14px}
+
+/* 弹窗 mock */
+.m-modal-mask{background:rgba(17,24,39,.42);padding:18px;display:flex;justify-content:center;align-items:flex-start}
+.m-modal{background:#fff;border-radius:9px;width:100%;max-width:430px;box-shadow:0 18px 44px rgba(0,0,0,.24);overflow:hidden}
+.m-modal-h{padding:12px 16px;border-bottom:1px solid #eceef1;font-size:13.5px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.m-modal-h .x{color:#9aa2ad;font-size:15px;cursor:default}
+.m-modal-b{padding:16px}
+.m-modal-f{padding:11px 16px;border-top:1px solid #eceef1;display:flex;gap:9px;justify-content:flex-end;background:#fafbfc}
+
+/* 列表 / 表格 mock */
+.m-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.m-table th{background:#fafbfc;color:#6b7280;font-weight:640;text-align:left;padding:8px 10px;border-bottom:1px solid #eceef1;font-size:12px}
+.m-table td{padding:9px 10px;border-bottom:1px solid #f3f4f6;color:#374151}
+.m-empty{text-align:center;padding:26px 10px;color:#9aa2ad;font-size:12.5px}
+
+/* 键值展示 mock */
+.kv{background:#0f172a;border-radius:8px;padding:13px 15px;font-family:"SFMono-Regular",Consolas,Menlo,monospace;font-size:12px;color:#e2e8f0;line-height:1.9;overflow-x:auto}
+.kv .k{color:#7dd3fc}
+.kv .v{color:#fbbf24}
+.kv .c{color:#64748b}
+.kv .cp{background:#1e293b;border:1px solid #334155;color:#93c5fd;border-radius:5px;padding:1px 7px;font-size:11px;margin-left:7px}
+
+/* 高亮标注 */
+.hl{position:relative;outline:2px dashed var(--red);outline-offset:3px;border-radius:6px;background:var(--red-soft);display:inline-flex}
+.hl.blk{display:block}
+.hl>*{flex:1;min-width:0}
+.hl::after{
+  content:attr(data-n);position:absolute;top:-11px;left:-11px;
+  width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;
+  box-shadow:0 2px 6px rgba(225,29,72,.42);
+}
+/* 箭头注释 */
+.arw{text-align:center;color:var(--red);font-size:15px;line-height:1;margin:3px 0;letter-spacing:.3em}
+.arw-l{text-align:left;padding-left:34px}
+.cap{font-size:12.5px;color:var(--muted);text-align:center;margin:0 0 20px;font-style:normal}
+.cap b{color:var(--ink2);font-weight:660;font-style:normal}
+
+/* 图注分组 */
+.figure{margin:20px 0 26px}
+.figure>.cap{margin-top:8px}
+
+/* 代码 */
+pre{
+  background:#0f172a;color:#e2e8f0;border-radius:10px;padding:15px 17px;overflow-x:auto;
+  font-family:"SFMono-Regular",Consolas,Menlo,monospace;font-size:12.5px;line-height:1.85;margin:12px 0;
+}
+pre .c{color:#64748b}
+pre .g{color:#4ade80}
+pre .y{color:#fbbf24}
+.code-inline{background:#f1f3f5;border:1px solid var(--line);padding:1px 6px;border-radius:5px;font-size:12.5px;font-family:"SFMono-Regular",Consolas,Menlo,monospace}
+
+/* 平台小节头 */
+.plat-head{display:flex;align-items:center;gap:13px;margin:34px 0 6px}
+.plat-logo{
+  width:42px;height:42px;border-radius:11px;flex:none;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;letter-spacing:-.03em;
+}
+.plat-head .pt{font-size:19px;font-weight:720}
+.plat-head .ps{font-size:13px;color:var(--muted)}
+
+/* 网格卡片 */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.mini{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px 17px}
+.mini .mh{font-weight:700;font-size:14px;margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.mini .mb{font-size:13.5px;color:var(--ink2);line-height:1.7}
+.mini.ok{border-color:#a7f3d0;background:#f6fefa}
+.mini.warn{border-color:#fde68a;background:#fffdf5}
+.mini.bad{border-color:#fecdd3;background:#fffafb}
+
+/* 优先级路标 */
+.road{list-style:none;margin:16px 0;padding:0}
+.road li{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.road li:last-child{border-bottom:none}
+.road .rk{
+  flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:750;font-size:13px;color:#fff;
+}
+.road .rb{flex:1}
+.road .rb .rt{font-weight:700;font-size:14.5px;margin-bottom:2px}
+.road .rb .rd{font-size:13.5px;color:var(--ink2)}
+
+/* 页脚 */
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer p{margin-bottom:6px}
+
+/* 目录 */
+.toc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;margin-bottom:34px}
+.toc h4{margin:0 0 10px;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:30px;font-size:14px}
+.toc li{margin-bottom:5px}
+
+/* 打印 */
+@media print{
+  body{background:#fff;font-size:11.5pt}
+  .hero{background:#1e3a8a !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .browser,.card,.note,.tw,pre{break-inside:avoid;page-break-inside:avoid}
+  section{break-after:auto}
+  h2{break-after:avoid}
+  .toc{display:none}
+  .wrap{max-width:100%;padding:0}
+}
+@media(max-width:640px){
+  .hero h1{font-size:24px}
+  .m-side{width:120px}
+  .toc ol{columns:1}
+  h2{font-size:20px}
+}
+</style>
+</head>
+<body data-page-node-id="tjCAFT40tCspaoOZmq5p6m">
+
+<div class="hero" data-page-node-id="vkpEJS4Ro2DJ2zu8wYbWB4">
+  <div class="hero-in" data-page-node-id="sbJbjLRDABAeAGQCVArDXk">
+    <span class="kicker" data-page-node-id="JnCDQP4PLwaLMXex11BA1C">PriceHunter · 配套交付</span>
+    <h1 data-page-node-id="TBspofDDIK9sxpHytg6kk2">联盟 API 密钥申请图文教程</h1>
+    <p class="sub" data-page-node-id="KKMFkwjOEjjCDBDHUxu3kH">照着点就能拿到 Key。覆盖京东联盟、阿里妈妈淘宝客、多多进宝、历史价格 API 四个数据源，每一步都配界面示意图，红框 + 编号标出「该点哪儿、该填什么、去哪儿复制」。</p>
+    <div class="hero-meta" data-page-node-id="zuwRN48rwe1eAP53aHmei9">
+      <span class="chip" data-page-node-id="VEolNGVRQ8C4DLjmUbJWyL">文档版本 v1.0</span>
+      <span class="chip" data-page-node-id="GUCYdXmhxBp3nmEj2i04Tc">核实时点：2026-09</span>
+      <span class="chip" data-page-node-id="lFIjyKdatHDGGNEiVsihhQ">预计总耗时：3–10 个工作日（含审核）</span>
+      <span class="chip" data-page-node-id="Mifv4sfct0GuJdc5YF87Uj">配套：docs/api-key-guide.md</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" data-page-node-id="YAULPi0kSbQHVoYH7O8SbT">
+
+<div class="toc" data-page-node-id="F2kn7E4k0hczdseUogPpq5">
+  <h4 data-page-node-id="aM7YS6y5VnW3Kij4y5k8fA">目录</h4>
+  <ol data-page-node-id="tvV8GhCJeDk7tgjVK9Byb5">
+    <li data-page-node-id="mp6F9ZQWAdEpxTO8R7JAr6"><a href="#s0" data-page-node-id="CB8N4NTQSfzzF7luft3E1G">开始前必读（先看，能省两趟）</a></li>
+    <li data-page-node-id="Rfu3pvjAFAWIx57ZehXoB5"><a href="#s1" data-page-node-id="WNmtSDQDNgHSjSeOwVo4GJ">四张 Key 总览对照表</a></li>
+    <li data-page-node-id="0KBPY6iT0iSC79bmUCESOk"><a href="#s2" data-page-node-id="69uyyyPrMajFCIuXhoT1D4">京东联盟 —— AppKey / AppSecret</a></li>
+    <li data-page-node-id="5aZynNED5ffiz3LuzkRoSC"><a href="#s3" data-page-node-id="2zCGP2h5wkwxDK8xZS80lf">阿里妈妈淘宝客 —— AppKey / AppSecret</a></li>
+    <li data-page-node-id="RdhVbASSd4Lf3YeSZcOgaE"><a href="#s4" data-page-node-id="PsxHjAbmmvkFDdsksFbWcO">多多进宝 —— clientId / clientSecret</a></li>
+    <li data-page-node-id="BUlrvJRygIQJP459Q3yhrf"><a href="#s5" data-page-node-id="kPIyhKAPPvCdNbdZOkFdIE">历史价格 API —— 最容易踩空的一块</a></li>
+    <li data-page-node-id="ZO2WddT2wCXaCwP822aSEJ"><a href="#s6" data-page-node-id="fPMbFru3RHPfqTOT0sRK93">常见坑与驳回原因</a></li>
+    <li data-page-node-id="AL6PsOj0U64ut2a0vooIKT"><a href="#s7" data-page-node-id="NAkauXlFwShl1EoBTAXQTQ">合规提醒（红线）</a></li>
+    <li data-page-node-id="D5RemS4aFYdpp1dAP5K5Hr"><a href="#s8" data-page-node-id="0yyd5SuOomEM4yI5ExXG7j">拿到 Key 之后：配置 .env 并验证</a></li>
+    <li data-page-node-id="OroTwQK7IuM2Zg29BHNGRR"><a href="#s9" data-page-node-id="ww6qaz6RlDG0D306DUT3CR">申请优先级建议</a></li>
+  </ol>
+</div>
+
+<!-- ==================== 0 ==================== -->
+<section id="s0" data-page-node-id="Gl3g7Qf3Jp9jb3s7vNHIWW">
+<h2 data-page-node-id="HltoBNsJBfKOAH8icdUSiR"><span class="num" data-page-node-id="sDkVznlzW6YMwQ4n6ZaYCr">0</span>开始前必读（先看，能省两趟）</h2>
+
+<div class="note n-danger" data-page-node-id="5RVI8ADxtdGnpf17kBKr2s">
+  <span class="t" data-page-node-id="NW4qiGPknFApbPr5GLqG37">最重要的一条事实：CPS 联盟 API 全都不含历史价格</span>
+  <p data-page-node-id="TXA5dMR0GyxJqsidSOZJHW">京东联盟、淘宝客、多多进宝这三家，回答的都是「<b data-page-node-id="3a5nFwxCpGWHq1d7i4RhAK">现在</b>卖多少钱、有没有券」。它们<b data-page-node-id="I2KIhPFfW1uMOrKGr9fTtH">没有</b>接口告诉你「过去 180 天卖过多少钱」。</p>
+  <p style="margin-top:8px" data-page-node-id="cabRgOP7EKdYLcVrN5H3l4">所以 PriceHunter 的历史价格曲线<b data-page-node-id="u5SMeuVJGZPUvSl5RKkjTs">必须单独接一个数据源</b>，即本文第 5 节。<b data-page-node-id="rlb44LFU6gF6JNOIJXhMJV">不要</b>在三家联盟后台里翻半天找历史价接口——找不到是正常的，不是你操作错了。</p>
+</div>
+
+<div class="note n-warn" data-page-node-id="vuO5S9gGjbjI26x8BYJ1We">
+  <span class="t" data-page-node-id="HXb2R6HkJeME35QIuYkyqB">关于本教程的可信度</span>
+  <p data-page-node-id="6D8XNCW39Z0lAlTHPxsgyl">本文所有入口 URL 与流程均于 <b data-page-node-id="B4pwyYcvP2kdOF2EvTMmho">2026-09</b> 通过公开资料与官网文档核实。但各平台后台改版频繁，<b data-page-node-id="WuOSWxho56hd75JWEbbEKS">按钮位置和菜单名称可能已变</b>，域名和整体流程一般不会变。</p>
+  <p style="margin-top:8px" data-page-node-id="U3U5IHUCYuAoe7DVpooAD6">凡标注 <span class="tag t-gray" data-page-node-id="06toVI4dEzRECGoiEK50Zv">未确认</span> 的内容，属于公开信息不足以定论的地方，<b data-page-node-id="ZtPhg3BTTSeXCxIgcR4U7d">请以平台官网当前页面为准</b>——本文不做编造填充。</p>
+</div>
+
+<h3 data-page-node-id="3fvTmek2R2gMVye0cn0gfh">开始之前，先把这 4 样东西备齐</h3>
+<div class="grid2" data-page-node-id="lN56z9RI3KhBAcsgUGSevz">
+  <div class="mini" data-page-node-id="hB5rTTuDrxWT0AX9cty6Ut">
+    <div class="mh" data-page-node-id="HEaTzr584ruEWyJ9Jt1ZXZ">① 一个实名手机号</div>
+    <div class="mb" data-page-node-id="5wH0r6lgil4YhRTqDRDSfo">三家都要短信验证码。建议全程用同一个手机号，避免后面账号体系对不上。</div>
+  </div>
+  <div class="mini" data-page-node-id="UXGqv0EIZeOC3ZJZIGjA0y">
+    <div class="mh" data-page-node-id="orGCoHxwoWdOP0T8F78NSv">② 身份证（个人主体）</div>
+    <div class="mb" data-page-node-id="JM4DIOVjvjWnWQHFLXyRCO">三家都要求实名认证，个人主体用身份证 + 人脸核验即可，不需要营业执照。</div>
+  </div>
+  <div class="mini" data-page-node-id="7TwAv3VzuWej63tI6Ez1nD">
+    <div class="mh" data-page-node-id="aPStGNlwi4sfV8muGAHPy4">③ 已备案域名（可选但强烈建议）</div>
+    <div class="mb" data-page-node-id="WKyEG44J20uM57QeZ8ybbu">京东「网站管理」、淘宝客「网站管理」都要<b data-page-node-id="uIyVwLehWyHv0mE8HSVYFn">工信部 ICP 备案号</b>。没有备案域名 → 直接走「导购媒体 / 社交媒体」通道，门槛低很多（第 6 节有对比）。</div>
+  </div>
+  <div class="mini" data-page-node-id="va59vH8QLqwH6DCFUlUefA">
+    <div class="mh" data-page-node-id="Potb65tE1Y5duKt2voSbNR">④ 一段「应用用途」话术</div>
+    <div class="mb" data-page-node-id="fTzaLaDqQLfMfDZZwNKyBr">填错会被拒。推荐写法见第 6 节，<b data-page-node-id="CGlHQBAupdeXrp0Pyraa9j">不要</b>写「自用比价工具」。</div>
+  </div>
+</div>
+
+<div class="note n-ok" data-page-node-id="Vb4GjUUx4jCKQoyMIaXbkh">
+  <span class="t" data-page-node-id="NrjdGd2wqSQ5v1RFW7u6ox">好消息：个人主体能申请全部 4 个 Key</span>
+  <p data-page-node-id="mj8XCkFJrjnlwpZkmgXkBv">本文 4 个数据源，<b data-page-node-id="LWKOEsJ1L7G93j7QKxR48I">个人身份均可申请</b>，不强制营业执照。区别只在「能拿到的接口权限多少」和「审核快慢」。真正卡个人主体的是<b data-page-node-id="LFHeGUvcUwh7WHxeVSSuBL">部分商用/订单类接口</b>，PriceHunter 用到的商品查询 + 转链类接口个人主体够用。</p>
+</div>
+</section>
+
+<!-- ==================== 1 ==================== -->
+<section id="s1" data-page-node-id="d2D1HWBL5sN76gEAdvmtuO">
+<h2 data-page-node-id="63HL4nQDGbyujhto9c7TvH"><span class="num" data-page-node-id="ELBZNRO2HoxtxAlWcsCfqN">1</span>四张 Key 总览对照表</h2>
+
+<p data-page-node-id="AWQabMKm0i7N2PEcNEYygV">先看清全局再动手。建议按<b data-page-node-id="ppaE9PZVLP3ZcR7z0gilxA">第 9 节的优先级</b>逐个申请，不要四家同时开——表单填错一次，来回就是两三天。</p>
+
+<div class="tw" data-page-node-id="w1kHFZ4CI2EdLUeYRjvzMk">
+<table data-page-node-id="UyMlfrs2D3POyGRW0UNApN">
+<thead data-page-node-id="dpZMCMM9nbj8hJZrpB95rs">
+<tr data-page-node-id="0HzaA1CGN4zP3YdL8nGQM4">
+  <th data-page-node-id="p2cE81DpJ9d0dzp9UKG5Gq">数据源</th><th data-page-node-id="xSOTZaM9QGCeqDGbhi9guL">拿到什么</th><th class="mid" data-page-node-id="5dMSGB2rcwBPuT2NzEwwrl">个人可申请</th><th class="mid" data-page-node-id="QHGZs0sMhM29UuZQ5bNoHQ">审核时长</th><th class="mid" data-page-node-id="YqkeGb4zELDiPloGQmt09l">免费额度</th><th class="mid" data-page-node-id="Lkoj08cPYs4i4AvrAMiaA1">难度</th>
+</tr>
+</thead>
+<tbody data-page-node-id="QgATzCO17EA2gHjxuYiw4w">
+<tr data-page-node-id="CCApD9eiOZsmVXkYVJbOcr">
+  <td data-page-node-id="M8Pm5O1vsKNrzazaJPwyjJ"><b data-page-node-id="LoWseFIg3GV5nriWbogvoO">京东联盟</b><br data-page-node-id="BMv7ZuF76yAkaNMRMw0zfJ"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="LRL5pGKXBPuRdfwQyM5Hu5">union.jd.com</span></td>
+  <td data-page-node-id="rsiALI9TC4XHAJermqxSGF"><code data-page-node-id="RkiPMKRLCH22bxZergz3oe">AppKey</code><br data-page-node-id="53ABElpQkgrXVFTvkiU1qo"><code data-page-node-id="OpDf7XVu0iVz3YZelqo4VG">AppSecret</code><br data-page-node-id="CZFCSCY6AxwV6kfz2vR4qJ"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="I1WjnS0BdcGvoRjYcQBkLb">＋推广位 PID</span></td>
+  <td class="mid" data-page-node-id="8zqQBVn3SS9WvnpOIw2hvG"><span class="tag t-easy" data-page-node-id="umDgpum85teO1Ocozt86N7">可以</span></td>
+  <td class="mid" data-page-node-id="3Cwu21G6ypz8AeDiwSJhF0">导购媒体：较快<br data-page-node-id="hboKzolN4nKtSYYW0zKnj8">网站/APP：1–3 个工作日<br data-page-node-id="sFVduV5i7rcZAZUHveHliE"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="n1gHZntxO1tAIbYIqdccUJ">（人工审核，波动较大）</span></td>
+  <td class="mid" data-page-node-id="9l9soXcMBUmEkPfELDg88n"><span class="tag t-ok" data-page-node-id="Gdu8Rv85oOKIS9dC2YIe6n">免费</span><br data-page-node-id="Fh3YrlLdNZir4Y4H62rYHp"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="4Puime0HdaDiCvsTwj0ByB">按接口限流</span></td>
+  <td class="mid" data-page-node-id="oyGanEEnjYQbBCEcYtH5NR"><span class="tag t-easy" data-page-node-id="dhjVOL9OP4A7TsvdKlF7BD">低</span></td>
+</tr>
+<tr data-page-node-id="yDRKpZuyEmv4HLG3vlsgSz">
+  <td data-page-node-id="xJVDlhFcel0wHe2XkcD7vh"><b data-page-node-id="zSyBpWQeSZEyGHT7P8cfa6">阿里妈妈淘宝客</b><br data-page-node-id="TZAJZYkkWUmMdXADP7FKqf"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="JJDdsQawe6HZzBIOBsAlmh">pub.alimama.com → open.taobao.com</span></td>
+  <td data-page-node-id="hdS2ZTfUcuXV3YzgPQEr3B"><code data-page-node-id="fwl0qAtsHLdv6OGdRm41jV">AppKey</code><br data-page-node-id="LrE6USDMOsInaTeikbG7Do"><code data-page-node-id="0NNG1SOYSSIDPSzXG60RYA">AppSecret</code></td>
+  <td class="mid" data-page-node-id="TWvL6dOHOPMrELeDbPapdm"><span class="tag t-easy" data-page-node-id="rxtSQCAApFGDlNb9Oqjs3S">可以</span></td>
+  <td class="mid" data-page-node-id="KFQA0rF1T9ELBNhlH6QIax"><b data-page-node-id="b9hRxUHnALxRUzADVZoT0j">应用标签审核 5–7 个工作日</b><br data-page-node-id="1E2IDrTFVvoowxs7txKZtj"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="CYd5of0x0p9MkTkyHz9aEr">（官方明示，最长一环）</span></td>
+  <td class="mid" data-page-node-id="bA2kpzNpxHXDcOMPbkLhf7"><span class="tag t-ok" data-page-node-id="EbjuJ7Fvv1G7JIFuoDBojz">免费</span><br data-page-node-id="ipfFH2QdNrirSpumOpG0gp"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="kZVJ3PdZr8AA1LeYYBfo3X">未上线 5000 次/天<br data-page-node-id="H4fYFpFjVR3PtLv1R1xIMS">上线后 100 万次/天</span></td>
+  <td class="mid" data-page-node-id="I4RQlB97HMqAI3iIMZ4CgA"><span class="tag t-hard" data-page-node-id="iRaUzHTa3A8MIGs8V327tc">高</span></td>
+</tr>
+<tr data-page-node-id="gHZfSwpnUHAwbKJs5ixBCu">
+  <td data-page-node-id="zQPedi5B2uGZCVYE6zrXga"><b data-page-node-id="kNKDH5Zb09fnrxuplC8BSy">多多进宝</b><br data-page-node-id="IJk8gvHeHQdFvBDSb8ChoA"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="DXcWXJ9BuUnKElsUSt1frw">open.pinduoduo.com → jinbao.pinduoduo.com</span></td>
+  <td data-page-node-id="y8e9IiNVntBNys2O0HnKo7"><code data-page-node-id="weGv903ojYsmWwHmdvNrdN">clientId</code><br data-page-node-id="Y13mANdqBiOu5AATyRmfGV"><code data-page-node-id="LHwPDPidbc3JU7GPs9ayQm">clientSecret</code></td>
+  <td class="mid" data-page-node-id="mVC2Z4yt3i0yhxlhsSg3qy"><span class="tag t-easy" data-page-node-id="uAizxCho1SLdh8HTLu2aCP">可以</span></td>
+  <td class="mid" data-page-node-id="c1PqjYYrnmV3SHnFFcvMs2">资质：1–3 个工作日<br data-page-node-id="wGhIAB8oVwFcr4GoBqFUlf">应用：多份资料称<b data-page-node-id="dZmWIgqJGWdxq8SqblEQXL">秒过</b><br data-page-node-id="aYbHHOPeEhHLY9CDYLVhgd"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="UM7T66KF7KoBsKaZ8vddM1">（以实际为准）</span></td>
+  <td class="mid" data-page-node-id="J63ms2IhQc20eIS3gdPrVM"><span class="tag t-ok" data-page-node-id="BCn5QEY6GqE6OLmXsD0K0V">免费</span><br data-page-node-id="XBDBgSFsgZPhUp2jn1ICZU"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="K8KJeASMXXRHDWR4uL1YtY">按接口限流</span></td>
+  <td class="mid" data-page-node-id="WE4zoNFu1Qhm34VWkqJ09R"><span class="tag t-easy" data-page-node-id="BpARBrAuIFFRB0at2oNGv1">低</span></td>
+</tr>
+<tr data-page-node-id="ESHCpojrf1pPEXrQqzn4YR">
+  <td data-page-node-id="REExcBp0PTKVI9uMGSbNzi"><b data-page-node-id="UtPOuZABJ3NpFAeB8abB2P">历史价格 API</b><br data-page-node-id="Rjkei2us1IX005zib05ARW"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="VOg5DsvEe4DdKSlwnmwmoe">独立第三方，非联盟</span></td>
+  <td data-page-node-id="E4x790adUPyzhDUKqRJAjT"><code data-page-node-id="KcLZZMOS8xPJAN5pBoz0BT">HISTORY_API_BASE</code><br data-page-node-id="Z3L8izWsquHt0mlaTG92Mc"><code data-page-node-id="1m7lb1PJz7LVawDMTL9FJc">HISTORY_API_KEY</code></td>
+  <td class="mid" data-page-node-id="JXF6OdqpLrte3V7kBZPmEy"><span class="tag t-gray" data-page-node-id="loOJdZfwMQkj0AiuoJBC20">视服务商</span></td>
+  <td class="mid" data-page-node-id="QVCeVERjvtwo6Z0ze6TXMM"><span class="tag t-gray" data-page-node-id="nxWb5OnF5OKY6DcBvbBGyz">未确认</span><br data-page-node-id="BpDFmV8IztsGsEPrK1hKcm"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="yLG1cSiAP4Sct4YhTrHD3m">详见第 5 节</span></td>
+  <td class="mid" data-page-node-id="tMCXDjaYn6hR6Kma4kaN8q"><span class="tag t-mid" data-page-node-id="JJUZclQjMrxDiH01wfAB2X">多数付费<br data-page-node-id="7dD9SRYckCMBCMXGzTAlNy">或有免费档</span></td>
+  <td class="mid" data-page-node-id="FDumPRjJASQwj6FxSAFKjO"><span class="tag t-hard" data-page-node-id="s6wsxNeg7BpEyitj7QtZ5f">高</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="note n-info" data-page-node-id="nOJLLCYhiKFRAzSPXYdFAQ">
+  <span class="t" data-page-node-id="YKwavjTevfxMIL5K5gCEUg">拿到的是「一对」而不是「一个」</span>
+  <p data-page-node-id="gO1nk5e5e9ymB0W3SEDnUV">每个平台都会给你 <b data-page-node-id="d6oBRxAK9WGrdcmtvyKYNq">Key（公开标识）+ Secret（签名密钥）</b>两个值。Secret 等价于密码：<b data-page-node-id="okwzeZJFYLbjNR1lakKieK">只写进服务端 <code data-page-node-id="vrgrDpzKxoWyf8IzDBe91D">.env</code>，绝不进前端代码、绝不提交 Git、绝不截图发群</b>。PriceHunter 的架构里密钥只在 Express 服务端参与签名，就是为了这点。</p>
+</div>
+</section>
+
+<!-- ==================== 2 京东 ==================== -->
+<section id="s2" data-page-node-id="LEp0xhdvSklPjTZVhOaPlJ">
+<h2 data-page-node-id="OlHQbHE1s1Fs6DGV7dhb0Q"><span class="num" data-page-node-id="iJ2HK5PG4YCzAv0rreKBux">2</span>京东联盟 —— AppKey / AppSecret</h2>
+
+<div class="plat-head" data-page-node-id="aC9tS7ePASF0Pjrtt2RJa8">
+  <div class="plat-logo" style="background:#e1251b" data-page-node-id="AZK73edGB36hav9SEe6vpA">JD</div>
+  <div data-page-node-id="szD30udLPiqHHtLZ0ZvqoX">
+    <div class="pt" data-page-node-id="SgX8dsOqq8S20N2Z1jx2cd">京东联盟</div>
+    <div class="ps" data-page-node-id="AlKbloYe9aPhXrWia15kCt">入口 https://union.jd.com　·　个人可申请　·　推荐第一个申请</div>
+  </div>
+</div>
+
+<h3 data-page-node-id="fgOxfdVCw5wQWOmHdMDFkQ">2.1 先选对通道（这一步决定你等 10 分钟还是 3 天）</h3>
+<p data-page-node-id="igzQoQlLML9DFDdNyv1Eto">京东联盟后台有 3 个并列的媒体通道，都能拿到 AppKey/Secret，但门槛差别很大：</p>
+
+<div class="tw" data-page-node-id="c6f2hIBL5zCFaG3IS3zexg">
+<table data-page-node-id="QqcjsBJJRGTgF50ChZnGwT">
+<thead data-page-node-id="rzsBWHWUUxPvtKl29tcQWg"><tr data-page-node-id="w647JQOqpqD6lhVljRiIAs"><th data-page-node-id="R3UT8PmzeNQ0768DOMfmDW">通道</th><th data-page-node-id="3HOMluxFB2DT5pWzvkkECa">位置</th><th data-page-node-id="QbFy04l5V8hTFB2nDEMbS8">需要什么</th><th class="mid" data-page-node-id="fr5C6m1olW3KdCDGewqFIK">建议</th></tr></thead>
+<tbody data-page-node-id="L6CkxDEkpiRPVEpXBjspmK">
+<tr data-page-node-id="vKTRogd6QiZpHeiGuiHzwc"><td data-page-node-id="yBmKvEhuKJIEdE4FRkm7cL"><b data-page-node-id="x8q3SH1NuORbvenODqEnhl">导购媒体管理</b></td><td data-page-node-id="VPhVWlwDfrRzltv2QQ9YFZ">我的推广 → 推广管理 → 导购媒体管理</td><td data-page-node-id="0XAz0S5j7jquJHCstKi8Mz">名称 + 类型（微信/QQ 等）+ 账号，<b data-page-node-id="AG2NkiQVfcMbdSIVnVOSzY">不要备案域名</b></td><td class="mid" data-page-node-id="vI2l8abTTQwJgpvHplYvG4"><span class="tag t-easy" data-page-node-id="1NHQslSfKg7Iciu8Flu97C">首选</span></td></tr>
+<tr data-page-node-id="ozH3u1Uw9NEPVn8gjIsqb7"><td data-page-node-id="5oycPxZpl5bxBh97dXhljy"><b data-page-node-id="yhbRd1Ougdh47walBePGJZ">社交媒体管理</b></td><td data-page-node-id="eEsO1PAsSzoBWEZVbeIV41">推广管理 → 社交媒体管理</td><td data-page-node-id="YZKNnMImqHSECKbVsr9W3i">名称 + 主页地址 + 登录账号，<b data-page-node-id="FRr7tyeD6GrAbyL8CTyrUz">不要备案域名</b></td><td class="mid" data-page-node-id="d4PHlAx6xCoRbv8SMLXMMM"><span class="tag t-ok" data-page-node-id="5SdC9XfiN1Me1jUNB7Ryng">备选</span></td></tr>
+<tr data-page-node-id="op3XCO9mImXF6KYPzj30iK"><td data-page-node-id="iu5sXEyRDWKJAONMALZDOD"><b data-page-node-id="COlXJr0jgMLjGE9LrC4tQH">网站管理</b></td><td data-page-node-id="FuiXx78OL5NZzvS1BJ8QuU">推广管理 → 网站管理</td><td data-page-node-id="jQHXvd31pcr7Yo3KjKe7GJ"><b data-page-node-id="caht4aBHjthj80GAx1Pkzv">必须已备案域名 + ICP 备案号</b>；若备案主体非本人还需营业执照 + 授权书</td><td class="mid" data-page-node-id="gEIWatEg9vdqXAmyI9jR6A"><span class="tag t-no" data-page-node-id="M4VeCKmAwIdpZrEnsCe9uE">有域名再走</span></td></tr>
+<tr data-page-node-id="GSg8hJj0cPKdgzvcDbLHit"><td data-page-node-id="wQpewGmJz2kDetg751pPIE"><b data-page-node-id="CsKVdWBnfKJe3tYGdH4EhP">APP 管理</b></td><td data-page-node-id="BMp3qZUkak4oOqcIssbU2i">推广管理 → APP 管理</td><td data-page-node-id="P9DWznckzbiAr2unxguAVg">需上架应用市场的 APP（包名 + 下载地址），<b data-page-node-id="u7FDR9i7aBm5SVfCG7m7PH">人工审核最慢</b></td><td class="mid" data-page-node-id="ndrVX4GHkHrouTLv6ttTRj"><span class="tag t-no" data-page-node-id="ijwbx4GNgfwNwSFYSDmLjW">不推荐</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note n-ok" data-page-node-id="eDwjuo90C0dI3wfCUfcX4g">
+  <span class="t" data-page-node-id="Es9YKJZBGZXRY0zem10aJ2">没有备案域名？走「导购媒体管理」，一样拿全 AppKey/Secret</span>
+  <p data-page-node-id="GoLDyVT8KOHU4yYvnlDnov">PriceHunter 只需要调 <code data-page-node-id="mWll0nYmoajVgx4owaKcOK">jd.union.open.goods.query</code>（关键词商品查询）这类只读接口，导购媒体通道的权限足够。<b data-page-node-id="KuCyJmAmAtrRp3eX03RcUP">不要为了申请 Key 专门去买域名备案</b>，那是几周的周期。</p>
+</div>
+
+<h3 data-page-node-id="34aGNZ4KAXbX3isj2Tqm9r">2.2 界面示意与操作步骤</h3>
+
+<div class="figure" data-page-node-id="G22k7UoMDDBttNfjC86nhb">
+<div class="browser" data-page-node-id="sUZg1yIrCEpvrPGviIzYom">
+  <div class="b-bar" data-page-node-id="HR2PM1KEWtngoDst4GKd48">
+    <div class="dots" data-page-node-id="xUbLwexYxziqLHYfTGTexP"><i data-page-node-id="OMFl20HfJvCgzI9sSghFIl"></i><i data-page-node-id="ueCsDvJtH1LhysXb5RQxqn"></i><i data-page-node-id="n53vvaXoVOsY6ADosmHiLY"></i></div>
+    <div class="nav-arrows" data-page-node-id="eQghV3NSwAp98IDBW0HK2n">‹ ›</div>
+    <div class="omnibox" data-page-node-id="0mDqIO07082wLGFtd0VjIU"><span class="lock" data-page-node-id="XsOBntiuB9XU7B7n9viXov">🔒</span><span class="host" data-page-node-id="72agiKAtv29hS0LwtHmxAw">union.jd.com</span><span class="path" data-page-node-id="GPKdGYPyOcwIb2qr9mRAuV">/manager/socialMediaMng</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="vcKefNxXJYil4xB9VN8Dxg">
+    <div class="m-topbar" data-page-node-id="ULWrWb3WkZXG2PwcAaX1lZ">
+      <div class="m-logo jd" data-page-node-id="o1LsB0Td9wuKe3hPdeFwkT">京东联盟</div>
+      <div class="m-nav" data-page-node-id="tawm7q6kOhTM5UiEewBdKA"><span data-page-node-id="EzmwaDRWG6UnPoQ3FBP3DB">我的推广</span><span data-page-node-id="zCho68zFN971D2QmCglQ13">我要推广</span><b data-page-node-id="VfAl6F1b4tIH5qJX5bjGCp">推广管理</b><span data-page-node-id="pzMLGdaTfYT59H9BXKdyVN">我的工具</span><span data-page-node-id="BQHop8pKP6F0ioFantxAGl">效果报表</span><span data-page-node-id="aSJO0g7fXxdGNEetSaecjX">结算中心</span></div>
+      <div class="m-me" data-page-node-id="soYZHj7kO1JO5Xym7S762I"><span class="m-avatar" data-page-node-id="fG6jZ0Bz8lhwxFAuL3z9tS">我</span><span data-page-node-id="EChMzh2Z9NqV50BObrLDp5">我的账号 ▾</span></div>
+    </div>
+    <div class="m-layout" data-page-node-id="PMi48WyHPNtDrfTCnBhha7">
+      <div class="m-side" data-page-node-id="VBKHbGWLjqztxtrcDWO59j">
+        <div class="sg" data-page-node-id="HnqvFCKaaRvwWGFQD9ze6F">推广管理</div>
+        <div class="si" data-page-node-id="wHX2ZHs1CoaxuWfCA10i1F">网站管理</div>
+        <div class="si" data-page-node-id="46CNaNhoVwZTKDAD4FZY4c">APP 管理</div>
+        <div class="si sub" data-page-node-id="C2HuIeveVBru97i2YKR0qj">iOS</div>
+        <div class="si sub" data-page-node-id="emB24g4GvpQH3ELWCBoDG4">Android</div>
+        <div class="si on" data-page-node-id="Lh1sxQGtZ4N7VxDmPRjthR">导购媒体管理</div>
+        <div class="si" data-page-node-id="3xnFsdkwuPqpWHtxnS22OF">社交媒体管理</div>
+        <div class="si" data-page-node-id="30TJL9wOMGXnXgsSKrPE7O">推广位管理</div>
+        <div class="sg" data-page-node-id="6DW3ccrm4fBGXBN1DFVnus">我的工具</div>
+        <div class="si" data-page-node-id="P9i47eIXbiX86UzNB0XVw4">接口管理</div>
+      </div>
+      <div class="m-main" data-page-node-id="AjCysjqBTyOFmCawGHvhv7">
+        <div class="m-head" data-page-node-id="WpFFYaYhpwMXzV7A0QkfF2">
+          <div data-page-node-id="35SDLwhW9IVKZX9gglTin2">
+            <div class="m-title" data-page-node-id="PMpacGyqudtaLmUDgGdwpJ">导购媒体管理</div>
+            <div class="m-sub" data-page-node-id="QvzdJ7LQT5Opt4ZoeEyOBu">共 0 条记录</div>
+          </div>
+          <span class="hl" data-n="1" data-page-node-id="8R7CFsAaaD5EqbI5xaEf4s"><span class="btn btn-red" data-page-node-id="x36f3wPe4Y5l5WxvUw7gHR">＋ 创建导购媒体</span></span>
+        </div>
+        <table class="m-table" data-page-node-id="OojOOQOrHD9RRuOnyx9l1B">
+          <thead data-page-node-id="45iQIHXnJRGDyRHWmnuYtv"><tr data-page-node-id="wWvaIEBsbyUX2FfHIDsIT4"><th data-page-node-id="DTi6rwZUlfZzBGIHssX4Vd">导购媒体名称</th><th data-page-node-id="lStjvXETai6rAxPJSVVm6L">导购类型</th><th data-page-node-id="s7xrE23EtZABwZ76kv6Jfx">状态</th><th data-page-node-id="nWmcJ9QhqZbVZBgH6CAQI6">操作</th></tr></thead>
+          <tbody data-page-node-id="4xCmEuDUQPwIeaD79aBWBV"><tr data-page-node-id="41chr4nPytqLBEdivjd1Mf"><td colspan="4" class="m-empty" data-page-node-id="gdS63zGZY2dZphwd5zHHw1">暂无数据，点击右上角「创建导购媒体」</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="2PTVAwY8pEbIPbnlQnijJ9"><b data-page-node-id="6PMqQo3e6TOXGQ0Ts29jbX">图 1</b>　京东联盟后台「导购媒体管理」页。左侧菜单选 <b data-page-node-id="xa9Z9YNYdFMkb4p7k7XiYS">① 导购媒体管理</b>，右上角红框按钮 <b data-page-node-id="2orWfRq4n2mfHqvrhw1hHC">② 创建导购媒体</b>。</p>
+</div>
+
+<div class="figure" data-page-node-id="xx4wHqMr55kctbj2Bd7zrQ">
+<div class="browser" data-page-node-id="Mzh1pTxoRrcfAEWnjJGpgF">
+  <div class="b-bar" data-page-node-id="4kNf7gZ4rdKmlHJ5MYZGcq">
+    <div class="dots" data-page-node-id="JedLwdERPFTUoCadcTIFZC"><i data-page-node-id="Hk6Jks1SjF8l4ZiMRznvHq"></i><i data-page-node-id="ZdCRLBnzZMAO5cnSPp34xu"></i><i data-page-node-id="foHrLbCf6dj4HNA6kPyIYZ"></i></div>
+    <div class="nav-arrows" data-page-node-id="ye3oSkUlR3ynUgxVT20Uee">‹ ›</div>
+    <div class="omnibox" data-page-node-id="okWTCap2PVOyasLLj2hCz3"><span class="lock" data-page-node-id="Hik03A8NBOkqa5tJeUT7HP">🔒</span><span class="host" data-page-node-id="BrVjy01q4AKDxpjCfh2haS">union.jd.com</span><span class="path" data-page-node-id="dOpKSSPmf3hjENsJS5HAIW">/manager/socialMediaMng</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="ctgvHCPcOB0qQhWpzHPnna">
+    <div class="m-modal-mask" data-page-node-id="GSuWf3wQAzgDummu6KrdNT">
+      <div class="m-modal" data-page-node-id="OQqkvNrMJyTtH42FfczEJN">
+        <div class="m-modal-h" data-page-node-id="gCJ4fEkw5PrYpF4QlNqDpb"><span data-page-node-id="FwxVn7yAn1vdlLIG8AfiLG">创建导购媒体</span><span class="x" data-page-node-id="gYvFGGSoKYJ8WV5NvGzirb">×</span></div>
+        <div class="m-modal-b" data-page-node-id="FgnsThIapIMeMiWfIMGMIO">
+          <div class="m-form" data-page-node-id="DA2pbKXg82lO6Wulr6qy7P">
+            <div class="m-row" data-page-node-id="HNaCuMPTh0cxnF77CXhiNQ"><div class="m-lb" data-page-node-id="3ntgO6HDuImZNayLWMHSnG"><span class="req" data-page-node-id="ewzszdiSsepKq1WdFnuOdw">*</span> 媒体名称</div><div class="m-input filled" data-page-node-id="DGCzGJ3COlAxinZPdAAW6I">价格猎人比价助手</div></div>
+            <div class="m-row" data-page-node-id="K3Bq315865zDNBuGiUK0CP"><div class="m-lb" data-page-node-id="FPZQajxdhPN0bjPgtZK6HC"><span class="req" data-page-node-id="VkFGqLeL0QDZaiuOFNPJRY">*</span> 导购类型</div><div class="m-input filled sel" data-page-node-id="CXIqCSpDKeODao9nlU2ZdF">聊天工具</div></div>
+            <div class="m-row" data-page-node-id="FfFufpHzuywLKQ7HKfFwx0"><div class="m-lb" data-page-node-id="BGPezOAqWNWcc6KmXAnuCN"><span class="req" data-page-node-id="DABP90i2akdwHDG6CCI9VV">*</span> 媒体类型</div><div class="m-input filled sel" data-page-node-id="nZg2HhsggCxVKuxdyMm1FE">微信</div></div>
+            <div class="m-row" data-page-node-id="is7d4lIN230tl96CoJH9k1"><div class="m-lb" data-page-node-id="BVcp09xKN4JY83JbZzVRBr"><span class="req" data-page-node-id="EKcgGjIzvBtqlTU7KrX22O">*</span> 账号</div><div class="m-input filled" data-page-node-id="oUpP6JkxQriGkH8efOTZ8K">price_hunter_demo</div></div>
+            <div class="m-row" style="align-items:flex-start" data-page-node-id="CsCDOfnwjMTES8nYuQNtA8"><div class="m-lb" data-page-node-id="Fvglx9OTvvi4TdtnHahkQW">用途说明</div><div class="m-input filled" style="min-height:52px;align-items:flex-start;line-height:1.6" data-page-node-id="m5Pyc2sODsyzCIQeY09WUe">为自有导购工具提供京东商品的价格与优惠券查询能力，用于向用户展示实时价格与可用券信息。</div></div>
+          </div>
+        </div>
+        <div class="m-modal-f" data-page-node-id="RR8gDzQGALTFQzq2lWaowy">
+          <span class="btn btn-ghost btn-sm" data-page-node-id="Cz79WgEqXD5AKcCpj5uXlD">取消</span>
+          <span class="hl" data-n="2" data-page-node-id="u6tCl95vuWz5dGhJtFBqw5"><span class="btn btn-red btn-sm" data-page-node-id="JVcHppHKW2iyecHnv8l9DU">确 定</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="B5Gt9IEIUP32EIX10NTRYP"><b data-page-node-id="N0ZGimNb0KDFvuUPh8WBwb">图 2</b>　创建弹窗。带 <span style="color:#e11d48" data-page-node-id="DvOjN0980GvZS5PfIrDpR8">*</span> 的必填。填完点 <b data-page-node-id="7SQpjUCAwznpKTYFFpswAP">③ 确定</b>。</p>
+</div>
+
+<div class="figure" data-page-node-id="IoyVTwGuIZnLsbUaVWo2uU">
+<div class="browser" data-page-node-id="EJE6nvBx8cH5nHooFVWpax">
+  <div class="b-bar" data-page-node-id="PDB0eejWoCAWdo34aEZKyH">
+    <div class="dots" data-page-node-id="pG0SfEu3V5NBTaxAkQtNKC"><i data-page-node-id="MR3n3dALqPZsTiFzNDjmxc"></i><i data-page-node-id="HzdgoW94WJfIVOOAvIAbWc"></i><i data-page-node-id="nLsK2B0Gn9o4Sk92JE9O98"></i></div>
+    <div class="nav-arrows" data-page-node-id="NaDqkHLrua8ccepHNH64k1">‹ ›</div>
+    <div class="omnibox" data-page-node-id="oXOm4GFTem2zaIGa6iRFjv"><span class="lock" data-page-node-id="LH827MUnHhoLDEiIQ7wiIH">🔒</span><span class="host" data-page-node-id="jEUwS2QcR7E9PGEE8GfM7k">union.jd.com</span><span class="path" data-page-node-id="YVBaCeD7hBEp8kdFUJe5CR">/manager/socialMediaMng</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="T1v42zUiKpZKu4GwiBNQz2">
+    <div class="m-layout" data-page-node-id="cML9JbeQ53W4pwiM4i0CqD">
+      <div class="m-side" data-page-node-id="F33YlyeUAjQJUVzV9irqHC">
+        <div class="sg" data-page-node-id="fGGWYHws4zQ8jmcFHXYXj6">推广管理</div>
+        <div class="si" data-page-node-id="6nit3ysEEBJJwMUGnWJMB8">网站管理</div>
+        <div class="si" data-page-node-id="Lr4jI8BzPMmKi7KKGJ2oiq">APP 管理</div>
+        <div class="si on" data-page-node-id="yNvKtsaqExXwHAqA3XDeZD">导购媒体管理</div>
+        <div class="si" data-page-node-id="sROhWc9Y14GDM3Bw78jANq">社交媒体管理</div>
+        <div class="si" data-page-node-id="eOftPka4gXE2i4mumJXXqi">推广位管理</div>
+      </div>
+      <div class="m-main" data-page-node-id="GQB5ztEucYtZXpwhwgSUUG">
+        <div class="m-head" data-page-node-id="b6s6grNf7gpCZ0Iu9Aa4ZE"><div data-page-node-id="kbC2mUSYlZ9We9G9X590tU"><div class="m-title" data-page-node-id="xQoO30qHVzT7IdstJCbR0Q">导购媒体管理</div><div class="m-sub" data-page-node-id="hEEbmFaNpL9afLgFNncb8H">共 1 条记录　<span style="color:#15803d" data-page-node-id="pX0I9IuxUyF1FdA6E3r01X">● 审核通过</span></div></div></div>
+        <table class="m-table" data-page-node-id="IcbONlV1pPEc5bCuZhZCam">
+          <thead data-page-node-id="9FXT9NNeg2ZkrOmK2JGDmc"><tr data-page-node-id="7lDblTRCkqmeMGhHakgGTA"><th data-page-node-id="5Czgn1UGGvgg813L5v3gpL">导购媒体名称</th><th data-page-node-id="os1TJzaUAoCGO0fr9atvJU">类型</th><th data-page-node-id="4RrqDA4ZeV5gsw1bslFeZT">状态</th><th data-page-node-id="O6Ywb1CUJQmYusVXtFWUYS">操作</th></tr></thead>
+          <tbody data-page-node-id="GiOGTjHSscPxtoaZ8F31qQ">
+            <tr data-page-node-id="nyPkYaRl6uLntFoJyS2FqN">
+              <td data-page-node-id="Dr0Zwfu8dXjXnQYkawfB6V">价格猎人比价助手</td><td data-page-node-id="NWELjTU1Bz7CLEnpEjXKCB">微信</td><td style="color:#15803d" data-page-node-id="v0linVf62HYqgtMWu6PjFF">审核通过</td>
+              <td data-page-node-id="MB2UkdgNhZyOR4MLNno5xA"><span class="hl" data-n="3" data-page-node-id="pTRkXACmQsPD3JEs4USmp7"><span class="btn btn-link" data-page-node-id="HRAtuOU3VHaL01cbQsUOfy">查看</span></span>　<span class="btn btn-link" style="color:#6b7280" data-page-node-id="Mu8yxD7vSDKka8sn9fwyU2">推广位管理</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:14px" data-page-node-id="StPhO2vVeXN857PxdfSFCU">
+          <div style="font-size:12px;color:#6b7280;margin-bottom:6px" data-page-node-id="YCBIq89F6HIJ5hbZ6Z9L6E">点「查看」后弹出的密钥面板 ↓</div>
+          <div class="kv" data-page-node-id="HSZH1szY302wB9kHkMcyoA">
+<span class="c" data-page-node-id="3iZIai0OaKW9micDJh22Yy">// 导购媒体详情 — 复制这两个值</span><br data-page-node-id="qYwKtUg9imPClSegMa0PkD">
+<span class="k" data-page-node-id="3voLxVuz1KJhB66bLJC8DH">app_key</span>    = <span class="v" data-page-node-id="TrR6h87QUbfU8U4CYJqKaW">9f8b7c6d5e4a3b2c1d0e9f8a7b6c5d4e</span><span class="cp" data-page-node-id="fCTMbslLbSuNpqj0rzkpuM">复制</span><br data-page-node-id="KpzrIbDzqJZChVymWZnYG7">
+<span class="k" data-page-node-id="uNokztUoqfJZnmFIwdEeKF">app_secret</span> = <span class="v" data-page-node-id="6hkj3Hjk3ZH8582XQBWOe4">a1b2c3d4e5f60718293a4b5c6d7e8f90</span><span class="cp" data-page-node-id="aGkhhCkLcHTOkKExbnAJR6">复制</span><br data-page-node-id="Eo4DcjjoDpawiFL9vmztYZ">
+<span class="c" data-page-node-id="CKEmCjcyfqwtUWIvFqr6Hg">// 另在「推广位管理 → 创建推广位」得到 PID，形如 1234567_88_99</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="C0mxaV9HsyObLyiTYydDwK"><b data-page-node-id="W2BcjDPCj8dPJphfDvQtxL">图 3</b>　审核通过后，列表出现「审核通过」。点 <b data-page-node-id="NHv0KWbtAlKG98iqEE1Upp">④ 查看</b> 拿到 app_key / app_secret；再进「推广位管理」创建推广位拿 PID。</p>
+</div>
+
+<h3 data-page-node-id="MJh8O1gOB5mZDmu19sJHWJ">2.3 文字步骤清单</h3>
+<ol class="steps" data-page-node-id="9cHjVR3q0zsJDCxAPvtY4c">
+  <li data-page-node-id="mxtDuGe5hEf2Apw6m5yVhP"><div class="sh" data-page-node-id="OPXq9t3Y3GnxSuaYRWAUNo">注册 / 登录京东联盟</div><div class="sb" data-page-node-id="4UQ4vOIGqgFEeJ733FE2yM">打开 <code data-page-node-id="f8TzBYeKO0TQo46TDMx5IX">https://union.jd.com</code>，用京东商城账号直接登录即可（没有就注册）。首次登录会提示完善个人信息——<b data-page-node-id="XuEStXFqQUIGTpdIwYOxAP">这段要如实填</b>，涉及后续佣金结算，乱填会影响提现。</div></li>
+  <li data-page-node-id="1e65cuINL54a7PIsLX4HTy"><div class="sh" data-page-node-id="Au7j4HVJCgjnjvl1DPshZ5">完成实名认证</div><div class="sb" data-page-node-id="40O3ITCuCh9Dcfxuf2Arxh">顶部导航「结算中心」按提示做实名认证 + 绑定银行卡。<b data-page-node-id="Sze8ts4BDIXCQx47qhzASE">即使你现在不打算收佣金也建议先做完</b>，部分接口权限与认证状态挂钩。</div></li>
+  <li data-page-node-id="PDip9l1a1YVeqPBsdkB2Lq"><div class="sh" data-page-node-id="lQETiali7VvGZF4YyCBD4O">进入「我的推广 → 推广管理 → 导购媒体管理」</div><div class="sb" data-page-node-id="hf0svjxRjGzHOQsa9eAURF">无备案域名就走这条通道。</div></li>
+  <li data-page-node-id="GdL8bi5LweNk1YA0SO1ym6"><div class="sh" data-page-node-id="c63yAF3YREgGsbnZbRuzWa">点右上角「创建导购媒体」，填表提交</div><div class="sb" data-page-node-id="SIbBsBAGnDa4Bn9zMbVk2k">名称、导购类型（聊天工具）、媒体类型（微信）、账号、用途说明。用途说明别写「自用」，写法见第 6 节。</div></li>
+  <li data-page-node-id="EUW9EC7JOGe2AvccXbhpME"><div class="sh" data-page-node-id="FtMYfsq0GrDWPwboQzxLl6">等待审核</div><div class="sb" data-page-node-id="d0DJBbqNrqJlpRjk3l9X0q">导购媒体通道通常较快；若走网站/APP 通道为人工审核，1–3 个工作日不等，<b data-page-node-id="5IcKlyEvbqGsO2ChphSrOR">具体时长官方未公示，本文不做保证</b>。</div></li>
+  <li data-page-node-id="ZFlBp0lHoTAdO4BtudqWdc"><div class="sh" data-page-node-id="UlMBLE9VtOmByDuHwtz12Q">点「查看」复制 app_key / app_secret</div><div class="sb" data-page-node-id="6Zxu33IIM9k5l1wIPdEPb7">立刻粘贴到本地一个临时文本文件里，别只留在浏览器。</div></li>
+  <li data-page-node-id="65I4om40MvlcpbN2IAwEt5"><div class="sh" data-page-node-id="hh7E388gryx4FCT4U9pBMA">（可选但推荐）申请具体接口权限</div><div class="sb" data-page-node-id="ZKew0WIFxb4I2mlygN3rxO">进入「我的工具 → 接口管理」，确认 <code data-page-node-id="xrehDU6dPAXYK0Udbu9SBf">jd.union.open.goods.query</code>（关键词商品查询）已开通，未开通就点申请。PriceHunter 主要依赖此类只读查询接口。</div></li>
+  <li data-page-node-id="RcvObdS1BqtMU8xRGnpqiG"><div class="sh" data-page-node-id="ZldCxo8GkHBQgFDFAFhdCT">创建推广位拿 PID</div><div class="sb" data-page-node-id="9mKLEmZqkCooOnd7QGOFvn">「推广位管理 → 创建推广位」，名称随意。生成转链时要用。</div></li>
+</ol>
+
+<h3 data-page-node-id="YEjeDGJm57mu6BlQfYrbMk">2.4 填进 .env</h3>
+<pre data-page-node-id="RnAMH7FE5svyK5F0Gcr0sN"><span class="c" data-page-node-id="moNyxOGsR9tlfLcyQP3Rkw"># 京东联盟</span>
+<span class="y" data-page-node-id="Vx3MitJpJPFtvuxnMEpTME">JD_APP_KEY</span>=9f8b7c6d5e4a3b2c1d0e9f8a7b6c5d4e
+<span class="y" data-page-node-id="qxFZhzzRKJWgYhU0ZYGRPo">JD_APP_SECRET</span>=a1b2c3d4e5f60718293a4b5c6d7e8f90
+<span class="c" data-page-node-id="QbuJMxgItDF4xOUDQLdxoK"># 推广位 PID（生成推广/转链时用，形如 1234567_88_99）</span>
+<span class="y" data-page-node-id="O7ToKFgyoiSRuOsqz9ixtl">JD_UNION_ID</span>=1234567_88_99</pre>
+<div class="note n-info" data-page-node-id="Z80grLaUsw6pS2br8rZob4">
+  <span class="t" data-page-node-id="Wzl6PXKBC33eY2RH4BVLfK">变量名以 .env.example 为准</span>
+  <p data-page-node-id="9wjAQv2gtuOPHNk5fmZWT8">本教程使用约定命名 <code data-page-node-id="NFh3DULbX1ejMEFoVQcsWJ">JD_APP_KEY</code> / <code data-page-node-id="qv8yZOhDtg7NEs6mKxbS3O">JD_APP_SECRET</code>。若工程师实现时用了别的名字（如 <code data-page-node-id="nUXww6jswSjKkccqryHC67">JD_UNION_APP_KEY</code>），<b data-page-node-id="cLlCDrdVF3Bo4d7HaUc5mH">请以项目根目录 <code data-page-node-id="3hpDudWmTg4jG2NSO6PRxB">.env.example</code> 里的实际变量名为准</b>——改的是左边的名字，值照抄。</p>
+</div>
+</section>
+
+<!-- ==================== 3 淘宝客 ==================== -->
+<section id="s3" data-page-node-id="7e0H7gY3Guj3okbff1FG8R">
+<h2 data-page-node-id="0s6a1rvyfArG3jdkRHSzkE"><span class="num" data-page-node-id="dZH2dhTuAodsFMC6GtjTWj">3</span>阿里妈妈淘宝客 —— AppKey / AppSecret</h2>
+
+<div class="plat-head" data-page-node-id="FzJ8KwxSc20rKy1mAmkokE">
+  <div class="plat-logo" style="background:#ff5000" data-page-node-id="7JpONmsyBAdCrq1pp4mZgj">TB</div>
+  <div data-page-node-id="zRHtwqSJxruiarlO1Vkft5">
+    <div class="pt" data-page-node-id="NshjyZEB6ovHL713bEd7jZ">阿里妈妈 / 淘宝开放平台</div>
+    <div class="ps" data-page-node-id="RRQC2GNu7fv8RbEYOxrJBC">入口 pub.alimama.com → open.taobao.com　·　个人可申请　·　审核最慢，建议第二个开始</div>
+  </div>
+</div>
+
+<div class="note n-warn" data-page-node-id="z5YbwSkDpSLw7Jv4FisqCh">
+  <span class="t" data-page-node-id="sbTB36OJTiYjjnOUwFY2hJ">这块有两个后台，别搞混</span>
+  <p data-page-node-id="VtceppFv4rAuWSNpSPbSwF"><b data-page-node-id="5TMX3DBkPmY94VSsORi7jo">淘宝联盟（pub.alimama.com）</b>＝媒体与推广位管理，负责「你是谁、你在哪推广」。<br data-page-node-id="Gfgx5gEYFwkJAfAuDufUKI">
+  <b data-page-node-id="pJTsD1x9qMYh6OOnPsiOTg">淘宝开放平台（open.taobao.com）</b>＝开发者与 AppKey/Secret，负责「你的应用凭证」。</p>
+  <p style="margin-top:8px" data-page-node-id="3tvu8Ivy6BmE2JuomkdS03">Key 最终<b data-page-node-id="qf2uTUPX5NouTOwSG1k5QB">一定是在 open.taobao.com 的「APP 证书」里看到</b>。pub.alimama.com 只是把你跳过去。</p>
+</div>
+
+<h3 data-page-node-id="M0BQwGQeRkyANTWqtsKqxn">3.1 界面示意与操作步骤</h3>
+
+<div class="figure" data-page-node-id="JPKXHgL3RH4yDbVv4mPq0Q">
+<div class="browser" data-page-node-id="Fmy5oj6b8Mvba0n3dItDAG">
+  <div class="b-bar" data-page-node-id="iLsO8SqBZMFWSikXSs6PzD">
+    <div class="dots" data-page-node-id="gNwx5bAIESpz8G3DVVnyWQ"><i data-page-node-id="C6M5q22YuB784WKBTNHQzH"></i><i data-page-node-id="nbY6zWCsVKf78IRgzOPZkx"></i><i data-page-node-id="b8I6wKSLX5gfD9n1oNW8R2"></i></div>
+    <div class="nav-arrows" data-page-node-id="xZzWxbhCriJPHBQR7BHUZh">‹ ›</div>
+    <div class="omnibox" data-page-node-id="6Uap1yGpWk5VDjfvItqPZu"><span class="lock" data-page-node-id="cu87a6EXEAhPoJLChqQt71">🔒</span><span class="host" data-page-node-id="z8T9EYRy9RCLEmAm7F83ax">pub.alimama.com</span><span class="path" data-page-node-id="tH8ZrSSesDTd7ojrsWVUq4">/myunion.htm#!/manage/site/site</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="Xgom4cac8AwyGKSUTSC664">
+    <div class="m-topbar" data-page-node-id="eAgRDjfGmRYG9OWiBNECwX">
+      <div class="m-logo tb" data-page-node-id="6b7i1dSIlwtdEFIfRRqBbO">淘宝联盟</div>
+      <div class="m-nav" data-page-node-id="eADCWMqe4PpDMvczPOEudd"><span data-page-node-id="VBhsWTcwfBO6EceiVelutK">首页</span><b data-page-node-id="b9pahTvsPLFMbtXXyB4QGW">推广管理</b><span data-page-node-id="C7s1fMESKVBAaEtNmxlLMN">我要推广</span><span data-page-node-id="PFTgiLyy8ykR2kEercepu5">效果报表</span><span data-page-node-id="O2XAaXatc10asPEkdxKWIK">结算中心</span></div>
+      <div class="m-me" data-page-node-id="HXbArcFDG62DCLggQksSN8"><span class="m-avatar" data-page-node-id="wM0N71cedkAGdVX28eG1Da">我</span><span data-page-node-id="Wq1PcDYS446uXJcC5d6gqk">账号设置 ▾</span></div>
+    </div>
+    <div class="m-layout" data-page-node-id="75AwHAQYRje86FVErhpEgJ">
+      <div class="m-side" data-page-node-id="nPUuzuE8r480YIPI7wQald">
+        <div class="sg" data-page-node-id="cvNfLs2Ey8jKcKaDm19gTW">推广管理</div>
+        <div class="si" data-page-node-id="9ANwJbVGwzk6IZcDBwmJuO">媒体管理</div>
+        <div class="si sub" data-page-node-id="4va3EaV5GHcstiBZbcfkNm">网站管理</div>
+        <div class="si sub on" data-page-node-id="8kFSM3gNhqBqNHzdsdzoG5">APP 管理</div>
+        <div class="si" data-page-node-id="Zo5dTX4fahbOPopmjgncAW">推广位管理</div>
+        <div class="si" data-page-node-id="KxGddX7WBeiJ1nQuAc0sGp">渠道管理</div>
+      </div>
+      <div class="m-main" data-page-node-id="dWPRXYqVEBHm9Mp5B7DSjs">
+        <div class="m-head" data-page-node-id="jsixCScmy8jOcxk4DgkXyY">
+          <div data-page-node-id="FnUytSnbncZdTm3vq1hQm9"><div class="m-title" data-page-node-id="3mX18N5zqGXNALesIFGxI0">APP 管理</div><div class="m-sub" data-page-node-id="0MXT3eZGJtxvciDhFWY6gd">创建应用后可获取 AppKey / AppSecret</div></div>
+          <span class="hl" data-n="1" data-page-node-id="gWYPaR2W1KTlCthKv1751r"><span class="btn btn-orange" data-page-node-id="inwVPMrZMlkIKY2XD5BvXB">＋ 创建 APP</span></span>
+        </div>
+        <table class="m-table" data-page-node-id="BFCUchG7QhvKN4SEB9FKli">
+          <thead data-page-node-id="pRz3K4h9DLyz1Qd8fPl0SZ"><tr data-page-node-id="AfSjkgztqdrZKpuU1Cuf3c"><th data-page-node-id="DxRgM9xElebsHAGmVxYMZN">应用名称</th><th data-page-node-id="UGxtdiS6p0x9fE4iRClWqU">平台</th><th data-page-node-id="L79lQJ0XjfuDwZs3O8N6fv">状态</th><th data-page-node-id="DHBpvlyJ1bnY8AIZSzMare">操作</th></tr></thead>
+          <tbody data-page-node-id="uWZV4kDDEHu1inZ8xzrJfb"><tr data-page-node-id="CRwrSX9wXYSJr3zg5SW1sG"><td colspan="4" class="m-empty" data-page-node-id="Bx9y0In8Wm5AzJP9BcUxAy">暂无应用</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="l2JQheWn7LV96fB0pFOswq"><b data-page-node-id="K5WxTpxKC6FmMG6fUtBRGq">图 4</b>　淘宝联盟后台。左侧「媒体管理 → APP 管理」，点右上角 <b data-page-node-id="5huRFlRMUtxD5fsNnz7ZEN">① 创建 APP</b>。<br data-page-node-id="vBfll39APv0jMjvRyJgV8o">
+<span style="color:#b45309" data-page-node-id="qA9PbHfz407FHAx3Vy32cK">※ 有已备案域名可选「网站管理」，无域名选「APP 管理」；也可回到左侧「导购管理」走无需备案的导购通道。</span></p>
+</div>
+
+<div class="figure" data-page-node-id="5E2FZJyRPPdNdvA8hZO9sj">
+<div class="browser" data-page-node-id="D5Ak8WNftKbQoOYVoebCQy">
+  <div class="b-bar" data-page-node-id="pEcMhE5mQUkEEUb0yd2feJ">
+    <div class="dots" data-page-node-id="OmgeeyGbkWiKCxTXaGAj2G"><i data-page-node-id="zVAK8zkBhHfoOhd3RLfWc4"></i><i data-page-node-id="QVM7CwU5CbdNQcdxzz4e7B"></i><i data-page-node-id="LgXHtg6KAWjfiDNx5wWLBs"></i></div>
+    <div class="nav-arrows" data-page-node-id="a7EDnmfqLxV1YG4UQrHH8C">‹ ›</div>
+    <div class="omnibox" data-page-node-id="xr0E9SqN6J4yLkBFxWWTGf"><span class="lock" data-page-node-id="hQKMSXxWZ7DgLseRjxPXm9">🔒</span><span class="host" data-page-node-id="JjI9aQLWkzvy1f6rqrI9on">my.open.taobao.com</span><span class="path" data-page-node-id="jNxoDDi3dVj2pwo73PveQW">/app/create</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="Nh5BJsmJ1IjaHJGqH2a7UO">
+    <div class="m-topbar" data-page-node-id="XnAyBPNWUmAZzbDExxSHMO">
+      <div class="m-logo" style="color:#ff5000" data-page-node-id="8iGv0iuy9PJmB8704kDpBa">淘宝开放平台</div>
+      <div class="m-nav" data-page-node-id="T5orGqW5tgCLdRCJJMYJzu"><span data-page-node-id="GBwYVehrQNioCFrKSbddXN">首页</span><b data-page-node-id="ErWpi94YR2FUVWicuzRBG0">控制台</b><span data-page-node-id="6Uz44MzzTJTdHcN8DZvO0F">文档中心</span><span data-page-node-id="MPQzNi7GGyJKawsrmFWMID">API 市场</span></div>
+      <div class="m-me" data-page-node-id="6nyT3KtHOzMH0Edi7xH5w3"><span class="m-avatar" data-page-node-id="CkUZPHEDFXkTImUeVzU96S">我</span><span data-page-node-id="fat0wIaOCFOP0vvSSqm4tP">开发者中心 ▾</span></div>
+    </div>
+    <div class="m-main" data-page-node-id="Kye6lM7BbMSuSCZdMUGsiG">
+      <div class="m-head" data-page-node-id="BiVanUpHgcfjOC5l1uZi0E"><div data-page-node-id="PMud0XBlINIP69ABPntFDJ"><div class="m-title" data-page-node-id="Pwa36TfBla6WlNeaZlBtP4">创建应用</div><div class="m-sub" data-page-node-id="AcvQoA2I1tWLplycatTmmB">第 1 步：申请应用标签　→　第 2 步：创建应用</div></div></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px" data-page-node-id="mhKofeTu5WmcCnZ5afgvM2">
+        <span class="btn btn-ghost btn-sm" data-page-node-id="s0AFn7ceWLAqYw4zDqrq9h">移动应用</span>
+        <span class="btn btn-ghost btn-sm" data-page-node-id="llNwvFL35hItVEO9aS3BZT">电商管理</span>
+        <span class="hl" data-n="2" data-page-node-id="DyuO1SteLXIHtt3cqNYjgU"><span class="btn btn-blue btn-sm" data-page-node-id="f9OehEgvoB7OdK2GUBoLxB">广告推广（淘宝客）</span></span>
+        <span class="btn btn-ghost btn-sm" data-page-node-id="UEj8eyXxDvyHiN6ORrD0AI">其他</span>
+      </div>
+      <div class="m-form" data-page-node-id="3ovS0wUFKbcINL2KDJeHRq">
+        <div class="m-row" data-page-node-id="bPftkx0Q54D97D0S0VUQTu"><div class="m-lb" data-page-node-id="QhQNQhMYueIQTzB8LmB5rE"><span class="req" data-page-node-id="4ENmXwOjVcErBEvFuzYa0Q">*</span> 应用名称</div><div class="m-input filled" data-page-node-id="ikeeMeVApMISLBUGEKodCk">PriceHunter 比价助手</div></div>
+        <div class="m-row" data-page-node-id="DsTyHVCKj7jn4B2JwoIcBn"><div class="m-lb" data-page-node-id="FDjkWeXsn4qaTfObhwKR18">应用图标</div><div class="m-input" data-page-node-id="LPyErWHJf38QZ2THRE0Oy9">选择文件…</div></div>
+        <div class="m-row" data-page-node-id="WDFgSCrWpm3Rjyg26BoGEn"><div class="m-lb" data-page-node-id="Mo3FAoXmhCYx9K7PxaPqA1">回调地址</div><div class="m-input filled" data-page-node-id="9wUkoVndYgVF3OSqyQ5spP">http://localhost:5173/callback</div></div>
+        <div class="m-row" style="align-items:flex-start" data-page-node-id="lqGgHA5VVy3B3HFl4v3BCz"><div class="m-lb" data-page-node-id="H4NFjrJGt3x2JRLbn2srIE"><span class="req" data-page-node-id="qqDI2C3dPscH9QdD2L4DR7">*</span> 应用简介</div><div class="m-input filled" style="min-height:52px;align-items:flex-start;line-height:1.6" data-page-node-id="DIZkOEWeYALcfUoehWduwE">为用户提供淘宝天猫商品的实时价格、优惠券与券后价查询，用于比价决策。</div></div>
+      </div>
+      <div class="m-form-act" data-page-node-id="k1k0gDB91s50zzzTCWbjGh">
+        <span class="btn btn-ghost btn-sm" data-page-node-id="CAFUzNnBW4gF0WJbn3G5wl">取消</span>
+        <span class="hl" data-n="3" data-page-node-id="Ig6E0MzJ6pusES2eYcxPBY"><span class="btn btn-blue btn-sm" data-page-node-id="9YjRTI2SKb3S4J6Bdizx18">提交审核</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="Wn1SWD7FFd3RBAp6BgX00z"><b data-page-node-id="DWzMr2O4Od0D4VrLNaAnJd">图 5</b>　跳到淘宝开放平台控制台。先 <b data-page-node-id="k4jUx9ILIckGkGqLIvVp7C">② 选择「广告推广」类应用标签</b>（淘宝客体系归属此类），再填表 <b data-page-node-id="3yT3iiCY24zShqKn4eJJiA">③ 提交审核</b>。</p>
+</div>
+
+<div class="figure" data-page-node-id="8IZn7F8Bz05PxL7wsCjXH4">
+<div class="browser" data-page-node-id="BDpYopE3DRWBaLUqXtsm8m">
+  <div class="b-bar" data-page-node-id="E37DijIQPP70ZJ2xeq4DHe">
+    <div class="dots" data-page-node-id="A8RUGdhrfvMRoC2kKaUfH1"><i data-page-node-id="LXKvt5skD3UKH6hAHIWBBg"></i><i data-page-node-id="0ygaz9nronTXFtLZu5rqjp"></i><i data-page-node-id="LU3SLyvkQexF9eZFv2vPYx"></i></div>
+    <div class="nav-arrows" data-page-node-id="bAQ5yVCyP2v7H8BxoEmi7O">‹ ›</div>
+    <div class="omnibox" data-page-node-id="HRQ1fXIiZ8wGcAyz2NmFrC"><span class="lock" data-page-node-id="1EYKvV4NXrYh7W1qnR9mBY">🔒</span><span class="host" data-page-node-id="Itylpqx6cUjx4Cg2jfLODn">my.open.taobao.com</span><span class="path" data-page-node-id="VdMQuybC0snxWchhSxPxBM">/app/detail?appkey=25xxxxxx</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="La8SbAAZUWfI70rYErrkHa">
+    <div class="m-topbar" data-page-node-id="tRzXEsHPtaeVJCrDAGoY4u">
+      <div class="m-logo" style="color:#ff5000" data-page-node-id="wvNHHBWhmpMCoOmwxbIsGY">淘宝开放平台</div>
+      <div class="m-nav" data-page-node-id="BbyH2xFFl2GU7KNJ2R5MzU"><span data-page-node-id="glYmNuZKIbHrVyQiac7nL1">首页</span><b data-page-node-id="JszE4sKgUi8kdis2o2TtEG">控制台</b><span data-page-node-id="xomWaxGawUMFZOODnMaDlG">文档中心</span></div>
+      <div class="m-me" data-page-node-id="jmFlwtvEVOkjtVaGAPp6En"><span class="m-avatar" data-page-node-id="vzd4DYYuEKUdn2dxBGu77l">我</span><span data-page-node-id="nFDymaGdH86pWZvsrBqP8K">开发者中心 ▾</span></div>
+    </div>
+    <div class="m-layout" data-page-node-id="obJCk60VsZaNP9X6frnkGy">
+      <div class="m-side" data-page-node-id="rcBBo224thrEJksp7gSUTz">
+        <div class="sg" data-page-node-id="qbY3WmUuUTmg8EAkEzfWRm">应用管理</div>
+        <div class="si on" data-page-node-id="DItGF3UCAbspABG7fvB6uz">概览</div>
+        <div class="si" data-page-node-id="HGzJIAsvkYSVKEUOyT8kvd">应用信息</div>
+        <div class="si" data-page-node-id="34GTCDf10dkJXvd7XYIRWE">API 权限</div>
+        <div class="si" data-page-node-id="fAApogwVxgBbzaTIcy5BxQ">流量包</div>
+      </div>
+      <div class="m-main" data-page-node-id="bd2yuZcnDDMFlYijozeCaT">
+        <div class="m-head" data-page-node-id="XZZSwVXkxAXorsIvKaRE0I"><div data-page-node-id="gZ9H3EuIskdWgUCRq9qCaF"><div class="m-title" data-page-node-id="zpONUcYOmQlkVP9WtEfpCT">应用概览 · PriceHunter 比价助手</div><div class="m-sub" data-page-node-id="sapRIFKok4mnenhJEGufWR">状态：<span style="color:#15803d" data-page-node-id="c26TA6G41mpwEl3KdTeiau">正式环境测试中</span></div></div></div>
+        <div style="display:flex;gap:8px;margin-bottom:13px" data-page-node-id="ZjuSdJDfhHoG2ioTWHbuDj">
+          <span class="btn btn-ghost btn-sm" data-page-node-id="lm9drXY6daBele1c0Wttdl">基本信息</span>
+          <span class="hl" data-n="4" data-page-node-id="DFDnR1Y5Mon9sKdAMkqkM1"><span class="btn btn-blue btn-sm" data-page-node-id="BoXcimLfq4Pze4DBAaYyYG">APP 证书</span></span>
+          <span class="btn btn-ghost btn-sm" data-page-node-id="3Qcz7FQU4kDy9ksvWfJWQN">API 权限</span>
+        </div>
+        <div class="kv" data-page-node-id="lJKpwCVH9e4ZrcLqmc3Tb9">
+<span class="c" data-page-node-id="GRE6KmsH9aukR2NZ7UKgDt">// APP 证书 — 点「查看」才会显示 AppSecret</span><br data-page-node-id="IjcpOXnRvCUl6zkvT0C80K">
+<span class="k" data-page-node-id="Rsh0ov5kDmIArHFD3Qys68">App Key</span>    = <span class="v" data-page-node-id="sdmoG7n5PejxYCv3vG6fUk">25xxxxxx</span><span class="cp" data-page-node-id="q8CKMsNxcWU7gj7OKVtgfI">复制</span><br data-page-node-id="i5rMCkmOLmwwXPRmb4oFof">
+<span class="k" data-page-node-id="xVgC8xrbHs4B1gTPnNNO95">App Secret</span> = <span class="v" data-page-node-id="TXz0YAZYSztxheXXyLFK0b">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><span class="cp" data-page-node-id="apo8apJhv302oFsiM62CBE">点击查看</span>
+        </div>
+        <div style="margin-top:13px;padding:10px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:7px;font-size:12px;color:#7c2d12" data-page-node-id="xcj3gXZ6HI4fI5hCDAGAeA">
+          ⚠ 同一页面切到「<b data-page-node-id="wVPbvDGLabcKjLbgerGIgk">API 权限</b>」标签，确认 <b data-page-node-id="YmFOLvRC1JNQncJHpRHFCb">淘宝客基础 API</b> 已开通；未开通点「申请权限」。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="qV8JJf2wSGtWG0L91H1AF0"><b data-page-node-id="tg36RqaBpyVxYAykqK90Xl">图 6</b>　审核通过后进入应用概览，切到 <b data-page-node-id="TYP6vdqaGOFuG1zXJq82SK">④「APP 证书」</b> 拿到 App Key / App Secret；顺手确认淘宝客基础 API 权限已开通。</p>
+</div>
+
+<h3 data-page-node-id="cGqttUBZPNAyqVtgrUKxNg">3.2 文字步骤清单</h3>
+<ol class="steps" data-page-node-id="j9x5a0q4ZBkMa4TOCrx0KI">
+  <li data-page-node-id="DDZnyp2Xp0IvRuOV8bGddr"><div class="sh" data-page-node-id="wK3jiWOyzN2hM7txNrHI8r">用支付宝实名认证的淘宝账号登录</div><div class="sb" data-page-node-id="1tiz1E1dtE0grXGSAYUVHg">淘宝开放平台要求账号<b data-page-node-id="BdMI3gtsMOb3Cp35b0byEN">已完成支付宝实名认证</b>。没有就去支付宝做实名。</div></li>
+  <li data-page-node-id="gzwHJuV7N4f6JJdT0FoX1g"><div class="sh" data-page-node-id="CsiEI2QiN5cMEMIvJxk0Oc">进入淘宝联盟后台 pub.alimama.com</div><div class="sb" data-page-node-id="qn8Ke3Zrl8Lxz1vWn0uCry">「推广管理 → 媒体管理 → APP 管理」（或「网站管理」/「导购管理」），点「创建」。</div></li>
+  <li data-page-node-id="ilysh6fQIHrddYT5f7xVfg"><div class="sh" data-page-node-id="e6ErH9T3NYMbdrhkohhIzJ">跳转到 open.taobao.com，先成为开发者</div><div class="sb" data-page-node-id="hBGHWe4n5F1vlBDyH0xBej">右上角「控制台」→ 提交开发者信息，完成<b data-page-node-id="RGmFm5uM6xdi4W21sJhaYo">开发者入驻</b>（个人主体可）。</div></li>
+  <li data-page-node-id="eMlNpkfwCDE22mg83eF1Bn"><div class="sh" data-page-node-id="pkZyN9CinGUIJoDG8CtLMd">申请「广告推广」类应用标签</div><div class="sb" data-page-node-id="DN5920QIBxQANw7mAn1MAB">官方流程：<b data-page-node-id="A4TxpGxCuCQEkMrWa3MB03">先拿应用标签权限，才能创建应用</b>。淘宝客体系归属「广告推广」类。</div></li>
+  <li data-page-node-id="TwCTQQFbagwt6yAs3KNwTl"><div class="sh" data-page-node-id="edxA1Qp1WvlNm1jZ9kZbmD">等 5–7 个工作日</div><div class="sb" data-page-node-id="4DrnEc6D4vIxEHJgZtqEum">官方明示：<b data-page-node-id="8Vuk2S31hWc13GvQzzv3uR">一般应用标签均需 5–7 个工作日审核周期</b>。这是四家里最慢的一环，建议尽早提交。</div></li>
+  <li data-page-node-id="i9WzK5475XFqjHzLrPesRe"><div class="sh" data-page-node-id="PGT9oZlRSsM1ArcHP9kxaw">创建应用 → 拿 AppKey / AppSecret</div><div class="sb" data-page-node-id="Nxjd46Uo7kC35QP6E9wTPy">应用管理 → 概览 → <b data-page-node-id="ZX7BvENETlSoc7gCC6IC6R">APP 证书</b>。AppSecret 需点「查看」才显示。</div></li>
+  <li data-page-node-id="AverkVIQ2MijVrftrQPIU2"><div class="sh" data-page-node-id="dyCC7Es6CfgbBeaSQl3L7E">申请「淘宝客基础 API」权限</div><div class="sb" data-page-node-id="iBNFiFdSN1AIHJZaC24YRB">同页「API 权限」标签页里申请。未开通则调用会报权限不足。</div></li>
+  <li data-page-node-id="5M68U9PbnYaKBvg059ubvL"><div class="sh" data-page-node-id="qgVj0uJanC9ODDHkeWPNAN">了解流量限制</div><div class="sb" data-page-node-id="bpajDAHfHsYtFvyijWKXCs">未上线应用 <b data-page-node-id="aIYO6k65H922jdLIEyNV7f">5000 次/天</b>；上线后默认 <b data-page-node-id="Qzlrf2VZHPgJfeparLvtxP">100 万次/天</b>。个人自用完全够。<b data-page-node-id="HAWoWzRCDaZEYLE94rUBBF">另注：官方说明未上线应用 3 个月未上线会被系统删除</b>——别申请完就放着不管。</div></li>
+</ol>
+
+<h3 data-page-node-id="8VtehBYeveKSwH3WYajG1i">3.3 填进 .env</h3>
+<pre data-page-node-id="wDvXyWRGKwPZn87QBgcuEy"><span class="c" data-page-node-id="qxRnZkuZXqXC8ydcTg7e9I"># 阿里妈妈淘宝客</span>
+<span class="y" data-page-node-id="lGGDZWGDIJoevDmAoHPy7R">TB_APP_KEY</span>=25xxxxxx
+<span class="y" data-page-node-id="0BGb2QJVAVv3iGRRdlpPH8">TB_APP_SECRET</span>=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</pre>
+
+<div class="note n-warn" data-page-node-id="FKQMHaSmTElOd5Q1rYbkrj">
+  <span class="t" data-page-node-id="Ztsea1EOkXXNcGXRnzuj5C">可能遇到的额外门槛</span>
+  <p data-page-node-id="eS9YzwFmgG18bmDHKdZeik">官方提到「<b data-page-node-id="IOilCIzp7PuZdAm1miV9YI">部分业务接入已饱和，不对外提供应用标签申请入口</b>」。如果你在控制台找不到「广告推广」标签的申请按钮，说明该标签当前不开放——此时<b data-page-node-id="AlwG7J4XITNsPh8bxvQDm9">只能等平台公告或改走第三方聚合服务</b>（如大淘客，见第 5 节），不要去搜所谓的「代申请」，多为灰色渠道且有封号风险。</p>
+</div>
+</section>
+
+<!-- ==================== 4 拼多多 ==================== -->
+<section id="s4" data-page-node-id="xZHMN0IdHmwDUEGk6us34f">
+<h2 data-page-node-id="zTAW0AS7bPwnCLxkhJ0NBa"><span class="num" data-page-node-id="pGACGmHUQd9YdthxLXZb9H">4</span>多多进宝 —— clientId / clientSecret</h2>
+
+<div class="plat-head" data-page-node-id="bfcOmJ0HQdcrKwwmSnft9P">
+  <div class="plat-logo" style="background:#e02e24" data-page-node-id="Cn617IFbU5z1cVNbRVGk3L">PDD</div>
+  <div data-page-node-id="Fz0LNQLkGmdYkRLYaj2zHT">
+    <div class="pt" data-page-node-id="stnsjxWDetUxhCwqvYspiH">拼多多开放平台 + 多多进宝</div>
+    <div class="ps" data-page-node-id="PZHcZdTELtGwsPDYIOnQS8">入口 open.pinduoduo.com → jinbao.pinduoduo.com　·　个人可申请　·　注意是「两步」</div>
+  </div>
+</div>
+
+<div class="note n-danger" data-page-node-id="8xUybBiDPIMObodPoKlwuC">
+  <span class="t" data-page-node-id="zquQXRpkbCbZaFYouW8qG3">最容易漏的一步：必须回多多进宝做「API 权限」绑定</span>
+  <p data-page-node-id="3CkhlgRFAdVJjjfiJXbjc6">在 open.pinduoduo.com 拿到 client_id / client_secret <b data-page-node-id="g96AGWHQxnHpFvwjukd4FW">不算完</b>。必须再登录 <code data-page-node-id="bJik8udzzhLN3r5ppGqtwA">jinbao.pinduoduo.com</code>，在「API 权限」里把 client_id 填进去绑定，否则调用会报错。<b data-page-node-id="jAcvKxS1v8Hkikeclst6TF">这是四家里唯一需要跨两个站点绑定的</b>，很多人卡在这。</p>
+</div>
+
+<h3 data-page-node-id="TufGM0pxNjTaWUU19STi8J">4.1 界面示意与操作步骤</h3>
+
+<div class="figure" data-page-node-id="q677BU3OCNU7EioJ8LesRf">
+<div class="browser" data-page-node-id="DEA38a6sO6JkHOsbjRjpcC">
+  <div class="b-bar" data-page-node-id="YIytgOSdE4KPyEARTIlhOk">
+    <div class="dots" data-page-node-id="6F1TsvA7MRwC2AOY0tXc0E"><i data-page-node-id="US7LuSDEyyLDTtBVrLwUeb"></i><i data-page-node-id="wCknqtUvMrJ8YGBLGKRpBA"></i><i data-page-node-id="NhCEdsJDTqx0O8vi5ITBKF"></i></div>
+    <div class="nav-arrows" data-page-node-id="AbdTcEmWZHhusQsQ0dnyJW">‹ ›</div>
+    <div class="omnibox" data-page-node-id="NqAYSFC4qMR045fqwkdGgq"><span class="lock" data-page-node-id="kFOvVs1t5UlkW0ioCd5tpq">🔒</span><span class="host" data-page-node-id="0qZihfTclbeHVBqb1jD3bM">open.pinduoduo.com</span><span class="path" data-page-node-id="mu7Yu0IX2lHhZ9wIjEPUF9">/application/home</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="3TH21yHrwvAkiKklemboI3">
+    <div class="m-topbar" data-page-node-id="ruPkuRg12i8LMYKhBOhlV0">
+      <div class="m-logo pdd" data-page-node-id="fn064jmUSeUvnf2qGKUoZD">拼多多开放平台</div>
+      <div class="m-nav" data-page-node-id="RyB5eAb9reTjpzGlQOVtsu"><span data-page-node-id="s2YBheOmHGFff9NBXobG7d">首页</span><b data-page-node-id="NlyKN5Uh251p3JGCxuQNZ8">控制台</b><span data-page-node-id="0cCHLC0gZisOHnY5CCDOfe">文档中心</span><span data-page-node-id="Tzqg8a6prHrAOuR7UDag5i">服务市场</span></div>
+      <div class="m-me" data-page-node-id="hqo03jsCFoqQf0tWQ36gle"><span class="hl" data-n="1" data-page-node-id="20GvseDTlmPeX62tRQY6IN"><span class="btn btn-pdd btn-sm" data-page-node-id="klXDuRx1Di762J6wxRxnNE">立即加入</span></span></div>
+    </div>
+    <div class="m-main" data-page-node-id="E66ajG33KuOBuS5V95631x">
+      <div style="font-size:13px;color:#374151;margin-bottom:12px;font-weight:640" data-page-node-id="RECFCRS4q15xMVCTc5e6rt">入驻流程</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12.5px" data-page-node-id="o6PjLQoAzFwEVxLrzQW8Gi">
+        <span style="background:#eef2ff;color:#3730a3;padding:6px 13px;border-radius:7px;font-weight:640" data-page-node-id="rR6DjknwzOtfIqwkGPpxcQ">① 注册账号</span>
+        <span style="color:#9aa2ad" data-page-node-id="Kpinqws442AAi0R0saKVnG">→</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 13px;border-radius:7px" data-page-node-id="1YSDscSMYjp4PtsyYwxFCz">② 开发者认证</span>
+        <span style="color:#9aa2ad" data-page-node-id="e0hTaa4tceYvxkk3xJEdzM">→</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 13px;border-radius:7px" data-page-node-id="DZCa23gbjvsHiauFiucrhc">③ 创建应用</span>
+        <span style="color:#9aa2ad" data-page-node-id="b5WF4pLQkvsB1mbv54s4R7">→</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 13px;border-radius:7px" data-page-node-id="bn0UvZOkw7WHk7IvMBQmCJ">④ 发布到服务市场</span>
+      </div>
+      <div style="margin-top:14px;padding:10px 12px;background:#ecfdf3;border:1px solid #a7f3d0;border-radius:7px;font-size:12px;color:#065f46" data-page-node-id="Ms5u09kzOU5LSSoIVXPkfe">
+        ✓ 提示：多多客联盟应用<b data-page-node-id="ArBJDQCdkEFqBDZDz4EwfY">无需发布到服务市场</b>，创建并审核通过即可使用。
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="zqDKFM9RsGL5v4RUGNwtX0"><b data-page-node-id="Fr0nDAmB3qIvWxABb6e53B">图 7</b>　拼多多开放平台首页。点右上角 <b data-page-node-id="jqrVg4aaPmxfjGn081rRKA">① 立即加入 / 注册账号</b> 开始入驻。</p>
+</div>
+
+<div class="figure" data-page-node-id="qMyqdUkxWhFFEie1UhcUkz">
+<div class="browser" data-page-node-id="3PEOSfYSoIo3mNj21i5ZUb">
+  <div class="b-bar" data-page-node-id="OmMyOD1aaQwAKNa5GxmNq5">
+    <div class="dots" data-page-node-id="BQ82lqlFxRo19DlbFU1WZl"><i data-page-node-id="TBICsrUX5J4wRjeoiJHBH8"></i><i data-page-node-id="21yptGiDbRDtHwYOsCdRGD"></i><i data-page-node-id="zrLqeyNlqdoHwKEB5QC7RU"></i></div>
+    <div class="nav-arrows" data-page-node-id="inw0MIDYruL82fYA100jNc">‹ ›</div>
+    <div class="omnibox" data-page-node-id="T3ofAwzhUOmQhZEMAM7xF3"><span class="lock" data-page-node-id="6pGPrfIuudRFOzszBJ2qBe">🔒</span><span class="host" data-page-node-id="GpTnb1O7OJb93PyuDX0Eek">open.pinduoduo.com</span><span class="path" data-page-node-id="ayiSWPzSwFuXWw2hrUXoHM">/application/index</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="EqqXgwAuNubfC90TXoIOBo">
+    <div class="m-topbar" data-page-node-id="HvWjQ2c2Oc7Tj7TSL9ybCI">
+      <div class="m-logo pdd" data-page-node-id="tVnuvHWgRPHpGopaZCGLJk">拼多多开放平台</div>
+      <div class="m-nav" data-page-node-id="RUbWoemlfOjit4IKstSXyQ"><span data-page-node-id="SH8xRf7XrZ0zmDojFi4Lje">首页</span><b data-page-node-id="u7wBLCORg1GjHbMAVFp3rV">控制台</b><span data-page-node-id="rBv9ad7AAsgUGxKrAGKZqr">文档中心</span></div>
+      <div class="m-me" data-page-node-id="qdRkXAA1x4XdjrlbEA3qY4"><span class="m-avatar" data-page-node-id="ABT8syRLOA6IlrdURUOfDH">我</span><span data-page-node-id="NirnCJfVbyPjIrWW1KCj9A">账号 ▾</span></div>
+    </div>
+    <div class="m-main" data-page-node-id="h2NOZBneeYCkTWekKfVxdJ">
+      <div class="m-head" data-page-node-id="XulTqSMYUZw04zW1kbFVzR">
+        <div data-page-node-id="o0m9cpgd2g7K0SB1YJmz20"><div class="m-title" data-page-node-id="mwVAgKLABABAm5f0gkOttR">我的应用</div><div class="m-sub" data-page-node-id="IDvoBBCOcTB5HfQTOgNvpq">共 0 个应用</div></div>
+        <span class="hl" data-n="2" data-page-node-id="AK5OKFsdO6rn8UUApBjThC"><span class="btn btn-pdd" data-page-node-id="lRbrsInLXrHUGjq4Q8ajwB">＋ 创建应用</span></span>
+      </div>
+      <div style="margin-bottom:12px" data-page-node-id="x1jMaDEUCB9xdjpOF3Brxw">
+        <div style="font-size:12.5px;color:#6b7280;margin-bottom:7px" data-page-node-id="BQ4dhCuCQdP9UwHP8V5CwG">选择应用类型</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" data-page-node-id="Hcun6Akc1tGkC3txtsbKlY">
+          <span class="btn btn-ghost btn-sm" data-page-node-id="9yWWk0dR7hyVgwvXr7F6wb">商家后台系统</span>
+          <span class="btn btn-ghost btn-sm" data-page-node-id="mTNAV6sM4aR9wZsEnibGVI">电商软件服务商</span>
+          <span class="hl" data-n="3" data-page-node-id="WgINxsyI1NkR4pbVhDlOul"><span class="btn btn-pdd btn-sm" data-page-node-id="tIwNTsOkir0Ym8nFWoYuXZ">多多客联盟</span></span>
+        </div>
+      </div>
+      <div class="m-form" data-page-node-id="TqdNkZgoiYSRcyC6PZXcs3">
+        <div class="m-row" data-page-node-id="2WhSX4vtvfDQlVrbpbLvYz"><div class="m-lb" data-page-node-id="dI31NMNnIHLDMo7BQCWWqx"><span class="req" data-page-node-id="fLvopj0ONLl4eobpwNpYOX">*</span> 应用名称</div><div class="m-input filled" data-page-node-id="8oEwmGOjWJBC21F7tUPpv3">PriceHunter 比价助手</div></div>
+        <div class="m-row" data-page-node-id="BrNNBzJI0bGapLQUxI4IUh"><div class="m-lb" data-page-node-id="3xfh90mFd3QYLxmKL0P7hc">应用图标</div><div class="m-input" data-page-node-id="9V36EsYfzYi0f2GmO3Wqod">选择文件…</div></div>
+        <div class="m-row" data-page-node-id="gGsAiSQkDbCfXtAYDY92uw"><div class="m-lb" data-page-node-id="lJEwJh3z3ZpYTrJ34UNEsR">PRD/MRD 文档</div><div class="m-input" data-page-node-id="zD6oiRO1wOksOhHokHneAq">选择文件…　<span style="color:#9aa2ad;font-size:11.5px" data-page-node-id="3LPCVblYgBWrATg5HZLXu6">（多多客联盟通常非必传）</span></div></div>
+        <div class="m-row" data-page-node-id="QUS6Q4HGDUsHDAMihPUMxQ"><div class="m-lb" data-page-node-id="DZ5BkiQPRtm7MYMzf8eFvV">回调地址</div><div class="m-input filled" data-page-node-id="waebS0LWetd1gkdAPdIQyY">http://localhost:5173/callback</div></div>
+        <div class="m-row" style="align-items:flex-start" data-page-node-id="JU0ILIinj7cfjOtLbxKyrt"><div class="m-lb" data-page-node-id="PxvNDZMpfJMMFeDXrlEEis"><span class="req" data-page-node-id="Iy44YPh6FkUl1tNoYo34U2">*</span> 应用说明</div><div class="m-input filled" style="min-height:52px;align-items:flex-start;line-height:1.6" data-page-node-id="30LKvGhQzkBfoORsF3mlDl">为用户提供拼多多商品的实时价格与优惠券查询，用于比价决策。</div></div>
+      </div>
+      <div class="m-form-act" data-page-node-id="Z8gLcyvKuMxono0soLRbtx"><span class="btn btn-ghost btn-sm" data-page-node-id="9nrRBwFiH6fB7TdLKfs6B0">取消</span><span class="hl" data-n="4" data-page-node-id="DBrjckycTIurqL5sTLlw0n"><span class="btn btn-pdd btn-sm" data-page-node-id="HG59FIftA91RIYvCL2dgCU">提交审核</span></span></div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="G5YFt0lWNDPn9cLa4EpcJM"><b data-page-node-id="GQVmczhub8E3kIHltcdjCs">图 8</b>　控制台「我的应用」→ <b data-page-node-id="6rBWwxAijB36wkReWXohUM">② 创建应用</b> → 类型务必选 <b data-page-node-id="8ZfTjdXnUJFsmyjw1YqXjM">③ 多多客联盟</b> → 填表后 <b data-page-node-id="itilVjWf3onB5lYmELpr8s">④ 提交审核</b>。</p>
+</div>
+
+<div class="figure" data-page-node-id="67KqTHu47xvS2plKdniseE">
+<div class="browser" data-page-node-id="vh62lK6ESEPAJ256NbDz03">
+  <div class="b-bar" data-page-node-id="utI2BJ89ZbaL2xD8KSJLTv">
+    <div class="dots" data-page-node-id="wGX3KPMwc3AeMPbduFxdsK"><i data-page-node-id="0BDIn0jSpiIm7TtUaGxFgv"></i><i data-page-node-id="ZLqt52L1umlDnfKb1rExao"></i><i data-page-node-id="1JXCEAnBKAxG2c2nm0JzWe"></i></div>
+    <div class="nav-arrows" data-page-node-id="CzYprdVEDgYyeXRdakZ1a3">‹ ›</div>
+    <div class="omnibox" data-page-node-id="BnYMHED5xlrWlDAAYs8Frt"><span class="lock" data-page-node-id="BxHHOiDPmmUTIHpjisXDK1">🔒</span><span class="host" data-page-node-id="QMVaMXpKqHrmC6o7R8lBcj">open.pinduoduo.com</span><span class="path" data-page-node-id="JskofwTxBrcHpLX88xUSFf">/application/index</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="fs08BKkhOatHAD3IWjXGWC">
+    <div class="m-main" data-page-node-id="wH05nLLnLPzq9SCViDkYGC">
+      <div class="m-head" data-page-node-id="yYLNFITFOgbCTUnfAKHZRz"><div data-page-node-id="RcxrJcM86pMInGDxfnZBhG"><div class="m-title" data-page-node-id="TRZGPOUpIKdDjwdqp4mubS">应用详情 · PriceHunter 比价助手</div><div class="m-sub" data-page-node-id="PsgyWyoH5XJqCmvxR4veHG">状态：<span style="color:#15803d" data-page-node-id="EM3XfxIpCgw37NuMWRS9Am">● 已上线</span>　类型：多多客联盟</div></div></div>
+      <div class="kv" data-page-node-id="m72E2uH3jqdGBHiTqCnqQf">
+<span class="c" data-page-node-id="DPmGqq7KsQLbQxPmHCKYrt">// 应用详情 — 复制这两个值</span><br data-page-node-id="1YWaGDI2zKqelWFfFwep9g">
+<span class="k" data-page-node-id="hWPSkHl1pNNagoCDKXC1c7">client_id</span>     = <span class="v" data-page-node-id="pLo3pCDZOGb3YwhCB9DDiq">a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6</span><span class="cp" data-page-node-id="41dLf3RdR6dgMIBHzoBYZZ">复制</span><br data-page-node-id="2K9AWJIkAHPkmv8cQ42qVT">
+<span class="k" data-page-node-id="LmMOEPGy2pRa59JbJLtLYO">client_secret</span> = <span class="v" data-page-node-id="IYUEsh49imkCAxVRopm9Dv">z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4</span><span class="cp" data-page-node-id="J51xKwj2WBnRVKerddI2k2">复制</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="arw" data-page-node-id="eS5mYkAJCst2AvZTDPg7Ld">▼</div>
+<div class="browser" data-page-node-id="vfJLA470oJZYQOU0pwaIiZ">
+  <div class="b-bar" data-page-node-id="Q8bHqnPvauw6pxvlx4LUYF">
+    <div class="dots" data-page-node-id="fVjfDVBqnwlODazHVW513Q"><i data-page-node-id="vTCgONS1JAz7jIzdfi2ESX"></i><i data-page-node-id="PH3VDjR8pkm7AdEdFvoXvo"></i><i data-page-node-id="1bBWzJrB2CehwEsetzrbbz"></i></div>
+    <div class="nav-arrows" data-page-node-id="KGZdXBw4MVnwoRbnbHupGk">‹ ›</div>
+    <div class="omnibox" data-page-node-id="g7oMQD4wsiYFEcmKNHRDil"><span class="lock" data-page-node-id="HXTCAyGvzm0JoVBK0va7qK">🔒</span><span class="host" data-page-node-id="H8YCpP9jS3ao9jQqJgxohK">jinbao.pinduoduo.com</span><span class="path" data-page-node-id="aU4Xw97VqPbi10PdZigsfS">/ 　（顶部菜单：API 权限）</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="X7hpBPD1LvP4n5zW5V0CU6">
+    <div class="m-topbar" data-page-node-id="yODsX04YUc5qBt2P1fpUkn">
+      <div class="m-logo pdd" data-page-node-id="AyzLOIwkznU892qSZtrTVF">多多进宝</div>
+      <div class="m-nav" data-page-node-id="RDvbVFULX4s16YbCXB09nn"><span data-page-node-id="x9qLhzmCuCuLjtoEFZVILh">首页</span><span data-page-node-id="YGyiYFPXDdU8ny4aTSxyhs">商品推广</span><span data-page-node-id="MddKPd91TslLcOXBkcDELf">效果报表</span><b data-page-node-id="Z2ssRWC52AVWcH4FJyLO2w">API 权限</b><span data-page-node-id="dLFoIoDJlzb8eAGTfJoDPg">推广位管理</span></div>
+      <div class="m-me" data-page-node-id="DkkrKx910CKF4NoilGeV3l"><span class="m-avatar" data-page-node-id="pg5UiORRHjwMNdteJ58AXb">我</span><span data-page-node-id="bFxBja4HoR69r5lxhgf76Y">账号 ▾</span></div>
+    </div>
+    <div class="m-main" data-page-node-id="gjXb8LNaHA2K8QEhuv5XQX">
+      <div class="m-head" data-page-node-id="ehbBKr7lyST4xMfai1GZkW"><div data-page-node-id="7S4tJkogU4tw4kv3HnabsN"><div class="m-title" data-page-node-id="RHxjS1Wa6DWL6bsDKJK6Gm">API 权限</div><div class="m-sub" data-page-node-id="dUIoXFKBufdtCON7M6AErU">将开放平台的 client_id 绑定到多多进宝账户</div></div></div>
+      <div class="m-form" data-page-node-id="AQPZfJC1e34rrZ2FQ7v2hx">
+        <div class="m-row" data-page-node-id="8ZDnmDYewoC3nTtlLjskfO"><div class="m-lb" data-page-node-id="RY64koweJvyaewGDeoh7Lr"><span class="req" data-page-node-id="B0GnQKuagRLQL9BN1WdgHq">*</span> client_id</div><div class="m-input filled" data-page-node-id="iUlnFMHoulJcuIWiftFll2">a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6</div></div>
+      </div>
+      <div class="m-form-act" data-page-node-id="y4Dq24TkEfpMhCjVhcKP9K"><span class="hl" data-n="5" data-page-node-id="7ygv1PR9DkVU3j0HENfHD4"><span class="btn btn-pdd btn-sm" data-page-node-id="3v2CoXUlP2jDbdLhuhz0LE">保存并绑定</span></span></div>
+      <div style="margin-top:12px;padding:10px 12px;background:#fff1f4;border:1px solid #fecdd3;border-radius:7px;font-size:12px;color:#881337" data-page-node-id="YCdpwHvoDIebeU4ZT7chmr">
+        ⚠ 不绑定，调用多多客接口会返回权限错误。此步不可跳过。
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="X4TImqVjnfbtIJgcvCjwcB"><b data-page-node-id="BfX50AWlS65K7TeFHsFvVF">图 9</b>　<b data-page-node-id="0fXJRcRxQ1F9HlcswIhHgC">⑤ 在 open.pinduoduo.com 应用详情拿到 client_id / client_secret 后，务必登录 jinbao.pinduoduo.com →「API 权限」→ 填 client_id → 保存绑定</b>。两步都做完才算通。</p>
+</div>
+
+<h3 data-page-node-id="NWKDtoX8cfACrfWvIdsp7S">4.2 文字步骤清单</h3>
+<ol class="steps" data-page-node-id="HGEeg6RZG9RHhLQt19wYPa">
+  <li data-page-node-id="7FVzq6yNNhv7Op9I3MbF4I"><div class="sh" data-page-node-id="AfuCy8rNhvLis5faDxqHKM">注册拼多多开放平台账号</div><div class="sb" data-page-node-id="GMB1GhPMZC8KymocCbx23J">打开 <code data-page-node-id="g5LgUTc8JdHYCk9D0sLZdj">https://open.pinduoduo.com</code> → 右上角「立即加入」→ 手机号注册。<b data-page-node-id="ZERzYJZtORhtAeKhnxgikB">此账号与你的拼多多购物账号、多多进宝账号是三套独立体系</b>，建议用同一手机号并记下密码。</div></li>
+  <li data-page-node-id="Gf0EyNDNw53CtR7J30pRVp"><div class="sh" data-page-node-id="kcuHV7XSDN3p1bAZGCf66v">选角色：「我是第三方开发者」</div><div class="sb" data-page-node-id="Av4GEwucgfZF1rVpuMbkIP">身份类型选<b data-page-node-id="l5Yi5EP0SFTFQQ0JKCc4CN">个人开发者</b>，如实填身份信息与联系人信息，提交审核。</div></li>
+  <li data-page-node-id="w2O7InzoviOpuSWL8tJ9Qa"><div class="sh" data-page-node-id="CeVOTO0f8GoRibFl44Tqam">等资质审核（1–3 个工作日）</div><div class="sb" data-page-node-id="ugyzuCrRIVKk5BsMqFthqs">多份第三方教程称「几小时内通过」，但<b data-page-node-id="X9de8Hmv4btClPyNMkZa6Q">官方未公示时长</b>，按 1–3 个工作日预期。</div></li>
+  <li data-page-node-id="IsbN9HILQ0xLA31ZiOr5Zt"><div class="sh" data-page-node-id="gRL4RKgIuCyeHLmHNfim0J">控制台 → 我的应用 → 创建应用</div><div class="sb" data-page-node-id="L4vdHk2FgwvjYQv4BQcCpH">应用类型<b data-page-node-id="uDgkrFesu2TX3idJDAZQn2">必须选「多多客联盟」</b>。选错（如「商家后台系统」）则拿不到推广类接口。</div></li>
+  <li data-page-node-id="0ku0YFaIdEg99ARA2D1Kse"><div class="sh" data-page-node-id="WyJSnoOTwEDIYFL8NOSmtD">填应用信息并提交</div><div class="sb" data-page-node-id="HlYqDlLyoHM2Jl3N0wIOD4">名称、说明、回调地址。回调地址填 <code data-page-node-id="yBIKAV8RCGlswdi8aXZbB5">http://localhost:5173/callback</code> 之类即可，后期可改。</div></li>
+  <li data-page-node-id="K9vamRk1gxKevxWbz6aBDg"><div class="sh" data-page-node-id="BQpMCLl1PhED91cQofw06E">应用详情里复制 client_id / client_secret</div><div class="sb" data-page-node-id="b22LWC2hRKFDx8lpOVJlOI">多多客联盟应用<b data-page-node-id="2beUiZKX0ILrHgWvUHh5es">不需要发布到服务市场</b>，审核通过即可用。</div></li>
+  <li data-page-node-id="t9u1trBPZZwQrSXmBzYx6w"><div class="sh" data-page-node-id="GxN2OS9pcwzzyr5qL8H6in">【关键】登录 jinbao.pinduoduo.com 绑定</div><div class="sb" data-page-node-id="m776fvCSf3MFO1T99dQUHy">顶部菜单「API 权限」→ 填入 client_id → 保存。</div></li>
+  <li data-page-node-id="I0XoBJZnpZWiaq4dMoE8j1"><div class="sh" data-page-node-id="u6otC8qZfXavaRokyqEvxy">做推广者备案 + 创建推广位（可选）</div><div class="sb" data-page-node-id="PEJXRjiLMQnFcm6hGXR48a">「推广者备案」里，<b data-page-node-id="H38egJHDBdJmiPaGsuH6M9">没有自有网站就选「他方平台 / 社交平台」+「个人账号」</b>。再到「推广位管理」创建推广位拿 PID。</div></li>
+</ol>
+
+<h3 data-page-node-id="Dm7YWUlWl3XoiD3SIGVRVW">4.3 填进 .env</h3>
+<pre data-page-node-id="yiJEEoxV3LMda2LXsGcKve"><span class="c" data-page-node-id="TIM3QCaJNZOxAWmoT0PL68"># 多多进宝</span>
+<span class="y" data-page-node-id="Xjs4WzSElnrFfNVmSbpJM9">PDD_CLIENT_ID</span>=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6
+<span class="y" data-page-node-id="3XXm1S2JbEGeEVD8CHHNm6">PDD_CLIENT_SECRET</span>=z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4</pre>
+<div class="note n-info" data-page-node-id="dtoy9rJO8bP0uJ3bsTL7mn">
+  <span class="t" data-page-node-id="IdWYtxIWhu6T8D6CNWaDZN">命名注意</span>
+  <p data-page-node-id="g6AkaFvx6a0wbOrOdY5T83">拼多多这家的两个值叫 <b data-page-node-id="Gc4QxHMrkkRzV9o50ngzOE">client_id / client_secret</b>，<b data-page-node-id="2FrAkbIRUxSyh26pcCSB8g">不叫 AppKey / AppSecret</b>。只是名字不同，作用完全一样。填 <code data-page-node-id="SDcXrUuRIar8TziGgiJRHV">.env</code> 时别张冠李戴。</p>
+</div>
+</section>
+
+<!-- ==================== 5 历史价格 ==================== -->
+<section id="s5" data-page-node-id="HHDjrMrls1oMfMz6V4Eovj">
+<h2 data-page-node-id="8UCYRLFZjIT5ilHNSaecVr"><span class="num" data-page-node-id="nf8X6Bn1iUIWqPquS6OHuX">5</span>历史价格 API —— 最容易踩空的一块</h2>
+
+<div class="note n-danger" data-page-node-id="s838odVFwmv4XNgC65yzN0">
+  <span class="t" data-page-node-id="HJIBDWJFRSGqqXpdOseHrH">再强调一次：这一节和第 2/3/4 节完全无关</span>
+  <p data-page-node-id="hD8mCpp4XlGCACH9Zmy6hX">京东联盟、淘宝客、多多进宝<b data-page-node-id="m47Mq7sJ7HZqZSyBHqE576">都不提供</b>历史价格。你要的第 4 个 Key 来自一个<b data-page-node-id="N36W9FRlHkugToTjsZOGuL">独立于三大联盟的第三方数据源</b>，需要单独申请、单独付费（或有免费档）。</p>
+  <p style="margin-top:8px" data-page-node-id="Bu1ArjQFHl4CFUD8nBJSjy">很多人的误区：以为在联盟后台多申请几个接口权限就能拿到历史价——不能。<b data-page-node-id="Q7gWr6xhlkWYM5zLhK78dT">历史价格本质上是「长期采集并存储下来的时序数据」，联盟平台自己不对外提供这种服务。</b></p>
+</div>
+
+<h3 data-page-node-id="YHYXtHh0bRsgYg0uw3Cc06">5.1 可选路线对比</h3>
+
+<div class="tw" data-page-node-id="5xo2mpWfqb5LG8OtaV2vHT">
+<table data-page-node-id="7DZQ8017FUegcIbLczj67G">
+<thead data-page-node-id="MZ19xEAm11eyVMQLjn8f1W"><tr data-page-node-id="GC7jCcDe1mue7wmlV3IFWV"><th data-page-node-id="o2mVlDPiiPBnEWydmaMyeR">路线</th><th data-page-node-id="Tr02wFzqeXmBJg4vtHCC46">说明</th><th class="mid" data-page-node-id="xZFo048r6AUQMTEuMsCAmm">自助申请</th><th class="mid" data-page-node-id="6MNSBGi9QVyt31dNiHfFPU">成本</th><th class="mid" data-page-node-id="9Rv7sVF24cNVbzXkrCVaWb">建议</th></tr></thead>
+<tbody data-page-node-id="AimVMz9bI967rb80mXoh3Y">
+<tr data-page-node-id="ewD0Wv0OKEpILX2eMqBStp">
+  <td data-page-node-id="phTvzG9whClP4vo7tJG4af"><b data-page-node-id="GspsSpfHCM4biuKy05tosS">A. 大淘客开放平台</b><br data-page-node-id="fOnOxzSK3HLEQxv6snFFLn"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="s8ftKzx84vDtIGq5f7B7wE">openapi.dataoke.com</span></td>
+  <td data-page-node-id="9TVqKxuGVEhoR52HixbB3R">有明确的「商品历史券后价」接口（<code data-page-node-id="HeiLYxIIIMtHq3CCfnacE4">/api/goods/price-trend</code>，返回 <code data-page-node-id="xcDk1Sn8PGydRg5iNYquzn">historicalPrice[]</code> 时序数组），官方文档标<b data-page-node-id="uYR0eGyF4bT0PZAzNZC7Zs">「免费接入」</b>。<br data-page-node-id="niriQ9QmL5AYdCdg5CTCAp"><span class="tag t-mid" data-page-node-id="o99RYLMl8lDkflk8pQdHgp">覆盖以淘系商品为主</span></td>
+  <td class="mid" data-page-node-id="TvkiPu3GLfVZrWAgHLSqPn"><span class="tag t-ok" data-page-node-id="JXCmtXoQ8IkaxwBnXIHYJX">有公开文档</span></td>
+  <td class="mid" data-page-node-id="XsYhtSoV1qbhDZFFFfwzAI">文档标免费</td>
+  <td class="mid" data-page-node-id="CrdOMFIf47WRBju94W6x2a"><span class="tag t-easy" data-page-node-id="iKeRIyuuJEQPBEC9oiAvUW">先试这个</span></td>
+</tr>
+<tr data-page-node-id="mdCtOj13AmAULBE9ypy82c">
+  <td data-page-node-id="YMdHOeZtkLACk4QJ6JCjN6"><b data-page-node-id="6bWJz1UaGjKihQUiwJjZ1f">B. 慢慢买 商务合作</b><br data-page-node-id="ac7EURODWtgji73D3tqmQW"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="4joQkpk2lEAhgw1ripaNlC">manmanbuy.com</span></td>
+  <td data-page-node-id="9ok3fiwuYA1WUGcVvSlsr1">历史价格查询的老牌数据源，覆盖京东/淘宝/拼多多等 100+ 平台。对外以<b data-page-node-id="aIMUUskhC0y2flGNpiPtVq">企业级数据合作</b>为主。<br data-page-node-id="VULvDosNhZU2104NnfCHHg"><b data-page-node-id="FC9d5iAG6Rm1Ib5WPjVfMK">截至 2026-09 公开信息未能确认存在自助注册入口</b>，请以官网为准。</td>
+  <td class="mid" data-page-node-id="q30PDfBr5wLNkVilZcH8R4"><span class="tag t-gray" data-page-node-id="DgfCMUDRZd2FshEUaWwZt3">未确认</span></td>
+  <td class="mid" data-page-node-id="QR1wHQBiVD5BjJ2ZeCiHgn"><span class="tag t-gray" data-page-node-id="8MuYtkBCrq11fuEjQ5BmgJ">未确认</span></td>
+  <td class="mid" data-page-node-id="Fz1xjPhjKG03oCABZ6Ospx"><span class="tag t-mid" data-page-node-id="f7kHwiQLscrpmYr7Ac0xaf">需商务对接</span></td>
+</tr>
+<tr data-page-node-id="ML3CuJ9EGYfHMFDqCU0u22">
+  <td data-page-node-id="2YYFZ5UhLHXqm8Z2ECEfhK"><b data-page-node-id="DiOiLPiT1AK7XsbsoPbQiz">C. 慢慢买 MCP Server</b><br data-page-node-id="cR1bRxHQ184QqnGu8d00S0"><span style="font-size:12.5px;color:#6b7280" data-page-node-id="dCOMDc4xrppBQJ3EkHPNp9">mpc.manmanbuy.com</span></td>
+  <td data-page-node-id="Gfj1fBdIC4JhnK58kYRgM3">官方为 AI 生态提供的 MCP 服务，含历史价格走势能力。<b data-page-node-id="l7LRYmLORn83wCd6Ecv9PK">曾公开提供限时免费测试 token</b>。<br data-page-node-id="CJu9AkivZtCddM9gN6UW6g"><span class="tag t-mid" data-page-node-id="txAQ6z2k3QFvpSv66Fi2tg">适合验证，不适合生产</span></td>
+  <td class="mid" data-page-node-id="ugtKiE1KODW3AaR1JzsyMy"><span class="tag t-gray" data-page-node-id="OtYMlGe7bBvWsAWPEtkhri">限时/渠道</span></td>
+  <td class="mid" data-page-node-id="aewFCUYwDRSeEFnIeHT3it">阶段性免费</td>
+  <td class="mid" data-page-node-id="ndl6r7M3CJQqntyk3awf7C"><span class="tag t-ok" data-page-node-id="eKxDzgNR5CK2wNXRyZronF">临时验证用</span></td>
+</tr>
+<tr data-page-node-id="qOCwi8Fvsr1GLk3tYTFDMb">
+  <td data-page-node-id="5rdDRzU4SlfsVzezE8dDn7"><b data-page-node-id="wA5gNNTSqTkpMZeO63oMVJ">D. 自建历史价格库</b></td>
+  <td data-page-node-id="D5YzHxBwu33yUHEKsyHyEa">每次查询把价格落库，随时间自然积累出曲线。<b data-page-node-id="YYpdPuIq8MIQbw6meQHnNa">零外部依赖、零合规风险</b>，但初期没有历史数据可看。</td>
+  <td class="mid" data-page-node-id="cqbQU4a6MjZEPWGBFfZrd0"><span class="tag t-ok" data-page-node-id="BY8lKxni34dtuTysG4kAsY">不需要</span></td>
+  <td class="mid" data-page-node-id="5K6WV7jFM9CsM3NzFtqm4s">仅存储成本</td>
+  <td class="mid" data-page-node-id="MrFCPE7GI1sDJMa9wfJpVw"><span class="tag t-easy" data-page-node-id="EuSYGfKXucwJodjzhLFf2E">长期最优</span></td>
+</tr>
+<tr data-page-node-id="q7YGgdo2HFfPzFHpB3XRaC">
+  <td style="color:#b91c1c" data-page-node-id="vMyftd3jQTGxgUELKS0tH1"><b data-page-node-id="MebO08jKZd5aa68drSJc8g">E. 逆向 / 抓第三方接口</b></td>
+  <td data-page-node-id="UXwfHhFPrWEBLVQwoeDXEx">网上流传大量「抓 <code data-page-node-id="9V873eCHZei3EZx66ddKVh">tool.manmanbuy.com/api.ashx</code>」「JS 逆向破解」教程。</td>
+  <td class="mid" data-page-node-id="vZ02zqfQCleuR3dK6BeaKW"><span class="tag t-no" data-page-node-id="y6jtYUpPHDTE5tCkb7Gd2x">—</span></td>
+  <td class="mid" data-page-node-id="SI9a6yO8OkEWqQT62FLKJB">法律成本</td>
+  <td class="mid" data-page-node-id="zyf270lQG2MyBjkgPh88Tq"><span class="tag t-hard" data-page-node-id="OHF90yJ8Dli8FMyNhjvxkA">禁止</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="note n-danger" data-page-node-id="KCzs8qc6ByXVcHC0n9FY0e">
+  <span class="t" data-page-node-id="OkF0jyE2irlDmNMvcbqmQB">路线 E 是红线，不要碰</span>
+  <p data-page-node-id="3EuJ7LcGa8BKpwp5DkCkZx">逆向第三方接口、破解 token、绕过鉴权，属于<b data-page-node-id="b5qT3zZFaLFlvB8gFEeTzc">绕过技术保护措施</b>，可能违反《计算机软件保护条例》与《反不正当竞争法》，同时大概率违反对方服务条款。<b data-page-node-id="jW6eOIF2leKD5mTr5OwGcu">本项目明确排除自建爬虫与逆向方案</b>（见需求规格「本期不做」）。</p>
+  <p style="margin-top:8px" data-page-node-id="bke5BCsvcHJFdVlSzegdJ1">如果你在别处看到「免费历史价格接口 + 抓包教程」，<b data-page-node-id="NjTD3ytELw9przZFgAzeJ0">不要照着做</b>。走路线 A 或 D。</p>
+</div>
+
+<h3 data-page-node-id="b5AN9y2MGK6iQ29mFGhwLE">5.2 路线 A：大淘客开放平台（界面示意）</h3>
+
+<div class="figure" data-page-node-id="XcnGq9lRbbJfApXCfvcO7q">
+<div class="browser" data-page-node-id="DHjQxXqzVZxg2G8dFhMKbt">
+  <div class="b-bar" data-page-node-id="IsQdZCY2rdP2WpGftjNdHM">
+    <div class="dots" data-page-node-id="n7670QJVV4sAx5eEAK56tU"><i data-page-node-id="wlbbc3b9yFFzZLFrwlkUWr"></i><i data-page-node-id="uVlILSArqOJQ6SUh5jhOEq"></i><i data-page-node-id="dzWw9wrYg6OeRDk7Fex5qR"></i></div>
+    <div class="nav-arrows" data-page-node-id="Uq1Q55nisdcnHXfme97bc1">‹ ›</div>
+    <div class="omnibox" data-page-node-id="eFINe0ITwSjDHrtypBIf9O"><span class="lock" data-page-node-id="dvhsRK18ga6h0jhJ0pIk2H">🔒</span><span class="host" data-page-node-id="J4LrbdKh2MdtAA6WqLB0OW">www.dataoke.com</span><span class="path" data-page-node-id="D9FlQKNKEw9D6LbWruolu3">/pmc/openapi.html</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="oRYG1298J24hT07gQDlAWP">
+    <div class="m-topbar" data-page-node-id="OqY0XzfKFzcdIlcZtY59wI">
+      <div class="m-logo dtk" data-page-node-id="EMA9uk7fEXD7OVh40K7DmU">大淘客联盟</div>
+      <div class="m-nav" data-page-node-id="OayQUhYPvWaVwYH8Lh9fDh"><span data-page-node-id="YKjVKgFB0zOSyFqEiEYhzB">首页</span><b data-page-node-id="DZziHaS6F2I6ljEteeaHBz">开放平台</b><span data-page-node-id="YC67vPBmvGzUMLugtYME8u">API 市场</span><span data-page-node-id="WTr4FKvq1zijCkkjGzsZFN">文档中心</span></div>
+      <div class="m-me" data-page-node-id="B2b4MEJdUiyfDXzQ3rU4ks"><span class="hl" data-n="1" data-page-node-id="mdZRFlRyjDjrAxNctFi0A8"><span class="btn btn-pdd btn-sm" style="background:#ff4d6d" data-page-node-id="aqDnAYyngZw6nQG1vPrN7f">成为开发者</span></span></div>
+    </div>
+    <div class="m-main" data-page-node-id="EEhKcvjjnj8GXBhufAtenW">
+      <div class="m-head" data-page-node-id="ezGT4t2ftWyxS5xrxJb5I6"><div data-page-node-id="7qz63gAsu1Bj2A9Hhq3ZOl"><div class="m-title" data-page-node-id="0TG95Ny7y3RJr9WLaX2s7s">开放平台 · 入驻</div><div class="m-sub" data-page-node-id="ABAU5YFE5Iwhy429WUdORQ">手机号注册 → 实名认证 → 创建应用</div></div></div>
+      <div class="m-form" data-page-node-id="C3VFwGls91w2x9ZuF0fRo4">
+        <div class="m-row" data-page-node-id="ircMsuyuh4nfYhqQXQae4i"><div class="m-lb" data-page-node-id="7V3CcgVKcj1DJTOs6zJg6D"><span class="req" data-page-node-id="MfaftBfVRfwbkW0hYYJRPH">*</span> 手机号</div><div class="m-input filled" data-page-node-id="AeuRyTO401JA6dmQS20MvA">138****8888</div></div>
+        <div class="m-row" data-page-node-id="48oq9GQHzn56P9ontfJLju"><div class="m-lb" data-page-node-id="odJwYUfNzpySPbGYbZvgaB"><span class="req" data-page-node-id="XEPGQFTFCRbk8DkNCiTRKZ">*</span> 主体类型</div><div class="m-input filled sel" data-page-node-id="RoeFpgRVKm8qcLAzYQqiiK">个人开发者</div></div>
+        <div class="m-row" data-page-node-id="rJQ92Ces6VMcG1pBGcn41x"><div class="m-lb" data-page-node-id="1ZeTnrrfK79VpNqe85K0sI"><span class="req" data-page-node-id="R4taytSsxrCaV6U8zex1t5">*</span> 实名认证</div><div class="m-input filled" data-page-node-id="XdlugnTmMHWOHQ1ldsWDlt">身份证 + 人脸核验</div></div>
+      </div>
+      <div class="m-form-act" data-page-node-id="xGUUaQQ9VJMTqvrO5TaL68"><span class="hl" data-n="2" data-page-node-id="7Li9DKmSk3HIPnvTFk1vJT"><span class="btn btn-sm" style="background:#ff4d6d;color:#fff" data-page-node-id="mgIDV9gqCQhuMdVwHAee9k">提交入驻</span></span></div>
+      <div style="margin-top:12px;padding:10px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:7px;font-size:12px;color:#7c2d12" data-page-node-id="O53Z1QUZu82Efgy62sX0Pw">
+        ⚠ 关于「个人主体能否通过」：<b data-page-node-id="Kgq7Zv9YaFxX2D0Z6MLNlJ">公开资料说法不一致</b>——有资料称个人可入驻，也有资料称「仅企业主体可开通正式商用权限」。<b data-page-node-id="6BUYGEZRLhuPHSwW6QS1Bm">此处请以官网当前要求为准</b>，未确认项不做断言。
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="vXFiXExHaRo5RUPmQb7H2D"><b data-page-node-id="uP5G47GurPJXWfYuqojUht">图 10</b>　大淘客开放平台入驻。<b data-page-node-id="OucpX8jywZA8pGOrQPNQPh">① 成为开发者</b> → 填资料 <b data-page-node-id="VWIpqjvIK7NFYkKMaFyXSl">② 提交入驻</b>。</p>
+</div>
+
+<div class="figure" data-page-node-id="Hvg2ItI8aKsw5xO5BKbf3A">
+<div class="browser" data-page-node-id="6IaR1uwpVCXNLK5Dr8zaZY">
+  <div class="b-bar" data-page-node-id="hHsbg7I0GVXO5mRyxeQk92">
+    <div class="dots" data-page-node-id="7OGU8u1AzEfNzMn6VFS9VO"><i data-page-node-id="QOWtJh6ku9GhUw6coVLQDX"></i><i data-page-node-id="iEEgB1RWJuriC42HTsEz5b"></i><i data-page-node-id="EDIZWx7eJozAc93Ea29H9q"></i></div>
+    <div class="nav-arrows" data-page-node-id="Atqx4lgzn8gbcrDoQy0Rb2">‹ ›</div>
+    <div class="omnibox" data-page-node-id="59I46t2GlljGXbLb1AyS3I"><span class="lock" data-page-node-id="exzWCh4PLBY5gqIlUcaKiM">🔒</span><span class="host" data-page-node-id="ApGSHNHMjjDEb4EZqMYMjT">shop.dataoke.com</span><span class="path" data-page-node-id="yDus2SZ8c03a6D9odQevrA">/pmc/api-d.html?id=36</span></div>
+  </div>
+  <div class="b-body" data-page-node-id="moPRFUS3hI2KLhdlQejkbb">
+    <div class="m-topbar" data-page-node-id="lDUucDX7ZBd7irzJbVMITR">
+      <div class="m-logo dtk" data-page-node-id="AFihUHuvTBDsSBO84dyyda">大淘客联盟</div>
+      <div class="m-nav" data-page-node-id="syhPxFW9vz0iKFB4OdiKOp"><span data-page-node-id="Dp7ScKI1dtK4zotmNIFA9n">开放平台</span><b data-page-node-id="eebXQtbpY0mYvx8ZHAmZqG">API 市场</b><span data-page-node-id="RjI845QjvATBadXgZitkKO">文档中心</span></div>
+      <div class="m-me" data-page-node-id="v0eW0zcAmVqAAfRwLzfFNg"><span class="m-avatar" data-page-node-id="0FbUpHcQFxZMl0dNO9zrey">我</span><span data-page-node-id="ya6dSjuWrOtiOFPiqzInJE">控制台 ▾</span></div>
+    </div>
+    <div class="m-layout" data-page-node-id="b3R3Mwfvwr2bYg72TvCtor">
+      <div class="m-side" data-page-node-id="SD5u3VvG2yDnEuPr6Wfs0x">
+        <div class="sg" data-page-node-id="mCkbOKjQPteFZRtljsCsTV">商品类 API</div>
+        <div class="si on" data-page-node-id="UuysBznvguV8rb3OJE3c7q">商品历史券后价</div>
+        <div class="si" data-page-node-id="FB1o9WwVQh3nLuF3ET1BeG">商品详情</div>
+        <div class="si" data-page-node-id="6faFyXlY81sRVWK9jLIWEW">商品列表</div>
+        <div class="si" data-page-node-id="YrEnJ0NuEKgOSfDYoAjD4W">高效转链</div>
+        <div class="sg" data-page-node-id="HU5mqE9ZPtjyip5pPSNs8q">订单类 API</div>
+        <div class="si" data-page-node-id="SHAZ5DeDbNFXLbFywV2RsB">订单查询</div>
+      </div>
+      <div class="m-main" data-page-node-id="CedCbEhEGeBquWnpsnXH0Q">
+        <div class="m-head" data-page-node-id="WMZEHTYkckcgi81v0746cr">
+          <div data-page-node-id="y41A52tSDwxyEf8586yLaE"><div class="m-title" data-page-node-id="HMIbDFinEeMmBSDhiYxC1E">商品历史券后价</div><div class="m-sub" data-page-node-id="6ROKJnMXZpYbdbV7Ug49jY">使用人数 2000+　·　版本号 v1.0.0</div></div>
+          <span class="hl" data-n="3" data-page-node-id="N5PeRSA97V3XHoPN2JqcI8"><span class="btn btn-sm" style="background:#ff4d6d;color:#fff" data-page-node-id="fYM0t3CRzV13M7FlgghQB9">免费接入</span></span>
+        </div>
+        <div class="kv" style="font-size:11.5px" data-page-node-id="aoGU5Hu27IQIlLQQEpZo3D">
+<span class="c" data-page-node-id="FOALunAm8bT2wa9PVE8Xhb">GET</span> https://openapi.dataoke.com/api/goods/price-trend<br data-page-node-id="erMo92Pyxn7r2PDI7jkAkL">
+<span class="c" data-page-node-id="DSlVJAyi7laek1FiPrSph4">参数：</span><span class="k" data-page-node-id="eJC52xSgfzXl1vTna3s6aI">appKey</span>=<span class="v" data-page-node-id="x3yv4W1CZdE2i4RET5M0pg">xxx</span>　<span class="k" data-page-node-id="UGfd7D7xLG8etdUujLAfFj">version</span>=<span class="v" data-page-node-id="9kvaZ1dhOngdJGJmSy0bQc">v1.0.0</span>　<span class="k" data-page-node-id="zotzih21bUbFZ7KRkSXBa3">id</span>=<span class="v" data-page-node-id="xi4dXsjpWXFjZ4FgGSCc5d">39690128</span><br data-page-node-id="iXdQdi9qw6CSjJrgy8mcHB">
+<span class="c" data-page-node-id="mb41qUABgIvsDAEaqcOQEI">返回：</span>historicalPrice: [{ <span class="k" data-page-node-id="t6S10XHo7HYkUIZYFWI5Hf">actualPrice</span>: 1280, <span class="k" data-page-node-id="GJ9isPiqL6K3I7jbLdiGhx">date</span>: <span class="v" data-page-node-id="xgLAdbmrdMkgwiHvphTtJ2">"2022-10-24 20:00:00"</span> }, …]
+        </div>
+        <div style="margin-top:13px" data-page-node-id="QdtERyeZT2LByROH8EJFWy">
+          <div style="font-size:12px;color:#6b7280;margin-bottom:6px" data-page-node-id="ZJlsTSiXyXP4hLZsAFRfix">在「控制台 → 我的应用」拿到凭证 ↓</div>
+          <div class="kv" data-page-node-id="pCLxVtvffPUx0ky5CQd18B">
+<span class="k" data-page-node-id="YpHQUTLME6moeiRsGdpxPQ">APP_KEY</span>    = <span class="v" data-page-node-id="UUxUGDpztLc81rEA83tlLX">xxxxxxxxxxxxxxxx</span><span class="cp" data-page-node-id="N72EA6k4Pri8o0kVZPc9eU">复制</span><br data-page-node-id="sIW5oZImxT6p2Dr5Kql657">
+<span class="k" data-page-node-id="UP8UEnQjY5fVBBryESpwcD">APP_SECRET</span> = <span class="v" data-page-node-id="O8OqDHdeKqtCZ1pCRkNWZv">xxxxxxxxxxxxxxxx</span><span class="cp" data-page-node-id="IP4lM1FbnCGNp4PV2Fxbwu">复制</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap" data-page-node-id="F4saMyM8oxpVTmEXhMjSAJ"><b data-page-node-id="2pFGDr2AEWuVznboCOytsO">图 11</b>　在 API 市场找到「商品历史券后价」，点 <b data-page-node-id="gnpiA5aaD25cXSy1Fk0JTX">③ 免费接入</b>；凭证在「控制台 → 我的应用」里取。</p>
+</div>
+
+<h4 data-page-node-id="0y164nCPpbDcLEc1NHGkAG">路线 A 步骤清单</h4>
+<ol class="steps" data-page-node-id="DRLRYq4DueE7O4uYDKe7fV">
+  <li data-page-node-id="sBZumgku6BgMEyTvDqLfMr"><div class="sh" data-page-node-id="GQDwSSiVMVih7OsCBZjcyc">注册大淘客账号</div><div class="sb" data-page-node-id="ph0pAyQtNfgv40TKyiVeh3">打开 <code data-page-node-id="avW7b8yIgnm6CBAeWzBwbE">https://www.dataoke.com</code>，右上角登录 / 注册（手机号）。</div></li>
+  <li data-page-node-id="sJdeuyUAyBqhE5ABggPt8s"><div class="sh" data-page-node-id="GpIB1mRwn0ECht9I51LQSM">进入开放平台成为开发者</div><div class="sb" data-page-node-id="gA7eqfb4x6gK4BfYqA5nUe">导航「开放平台」（或 <code data-page-node-id="mq0qcABQx2zgHVg8nnAexU">www.dataoke.com/pmc/openapi.html</code>）→「成为开发者」→ 提交资料。</div></li>
+  <li data-page-node-id="F32SjgRHMogBKWwfm1xLnH"><div class="sh" data-page-node-id="s6Knvj4unMMmHgJH628nYk">等审核（1–3 个工作日）</div><div class="sb" data-page-node-id="05snIpdilgTJCXme7fFAAA">多家第三方资料称 1–3 个工作日，<b data-page-node-id="Q9t9W6LlNzOKzH4JMboDhN">官方未公示确切时长，未确认</b>。</div></li>
+  <li data-page-node-id="LzCdJ4j5chIlW7QdI40Vue"><div class="sh" data-page-node-id="lBsusJtASCTiCnMOMfVGEX">创建新应用，拿 AppKey / AppSecret</div><div class="sb" data-page-node-id="6k9u8bzXC2NrO7xMoIJMM6">「我的应用 → 创建新应用」，填应用名称、类型、访问域名。注意：有资料提到<b data-page-node-id="oZTLmja3Y47yzU1fjitOOD">回调域名要求 HTTPS + ICP 备案</b>，否则可能报域名校验错误——<b data-page-node-id="lPxB6mD8a3Tfrjp8OfgDL9">此项未确认，以官网表单提示为准</b>。</div></li>
+  <li data-page-node-id="Euf7CtiAyGzA0tcnkWQZ09"><div class="sh" data-page-node-id="78xUlmHjaSXh2ZSZCEYFX8">在 API 市场开通「商品历史券后价」</div><div class="sb" data-page-node-id="gDilxaYUAhPaE99J4zsw9O">搜索并申请该接口权限。</div></li>
+  <li data-page-node-id="h7qvovh9RfB2Z1IYt8zGkF"><div class="sh" data-page-node-id="j2gRcFiHbLGW0FCBrtCGN2">填进 .env</div><div class="sb" data-page-node-id="Q8AXsLGVemSaObCsSCzzDb">见下方代码块。</div></li>
+</ol>
+
+<h3 data-page-node-id="lO5Mcu93Yx0csd1F0Gb5dh">5.3 路线 D：自建历史价格库（零成本兜底方案）</h3>
+<div class="note n-ok" data-page-node-id="uHjmMBe0qUqLXaDxJPCJEK">
+  <span class="t" data-page-node-id="82A43UeumOkaqG16soiC8i">如果第 4 个 Key 一时拿不到，先这样跑起来</span>
+  <p data-page-node-id="liVHEO6SMfdATHQAUC1Bdg">PriceHunter 的架构里历史价是独立 Adapter（<code data-page-node-id="ZCSRFDJrBHp7540dVKeiuQ">HISTORY_API_BASE</code> + <code data-page-node-id="8oELmUaLH9KpPFxSAQkOvw">HISTORY_API_KEY</code>）。你可以：</p>
+  <ul style="margin-top:8px" data-page-node-id="FGp8srDeQCVL0yQUnRv3EL">
+    <li data-page-node-id="PxF8tcJthw359tB73Y15bX"><b data-page-node-id="7XVUtjBZODDthfnhVzvAg1">短期</b>：不配 Key，历史价模块返回 Mock / 空态，页面照常显示比价与优惠券结果（核心功能不受影响）。</li>
+    <li data-page-node-id="SZ9BuIxcgAh7dpqxrgCX6c"><b data-page-node-id="7HpBGibA3MACYfx22wda8b">中期</b>：在后端每次成功查询时，把 <code data-page-node-id="2GQoHz89MmNDepv8EsZE9C">{platformId, itemId, price, timestamp}</code> 写进一个轻量存储（SQLite / JSON 文件即可）。跑几周就有真实曲线了，而且<b data-page-node-id="Xo0Mw8MrPfjKbiEdIXQQwN">数据是你自己采的，合规无争议</b>。</li>
+    <li data-page-node-id="J8LHIpUBP4V9Y0jhO0SIJ4"><b data-page-node-id="olwGoPUQbgrlD7qQGbauVD">长期</b>：等拿到第三方历史价 Key，把它作为「历史冷启动数据」+ 自建库做增量，两者互补。</li>
+  </ul>
+</div>
+
+<h3 data-page-node-id="adtx9NeF0VU8tCKLhghnaH">5.4 填进 .env</h3>
+<pre data-page-node-id="iPlhuGrYflhNAnMreqrTR2"><span class="c" data-page-node-id="AmecJ8buwXxfL37FRfwUgW"># 历史价格 API（第三方，按需二选一）</span>
+
+<span class="c" data-page-node-id="Rxe7qwc7xsP6gzPsCqEGKX"># 方案 A：大淘客</span>
+<span class="y" data-page-node-id="nJTA8Vj2OmXlmblmamt6rp">HISTORY_API_BASE</span>=https://openapi.dataoke.com
+<span class="y" data-page-node-id="WtA6eJgunshjegjPN6AoQZ">HISTORY_API_KEY</span>=你的大淘客 AppKey
+<span class="c" data-page-node-id="9lISoTODJ9WbgzjPQG0M3f"># 若 Adapter 还需 Secret，按 .env.example 补充：</span>
+<span class="c" data-page-node-id="3vGqn488DqJkqtBzCBW7pf"># HISTORY_API_SECRET=你的大淘客 AppSecret</span>
+
+<span class="c" data-page-node-id="amdhekkyYNM8MSlturCkGA"># 方案 B：其他第三方历史价服务（base + key 可配置，Adapter 化）</span>
+<span class="c" data-page-node-id="BBpYvLd6jtXDuTxDLsKgCZ"># HISTORY_API_BASE=https://服务商提供的 baseUrl</span>
+<span class="c" data-page-node-id="u5HsnwjhUP7YXeHFk7BmUA"># HISTORY_API_KEY=服务商提供的 key</span>
+
+<span class="c" data-page-node-id="5VRbhXA12u2ztapESinjLd"># 留空则历史价模块降级为 Mock / 空态，不影响比价主流程</span></pre>
+</section>
+
+<!-- ==================== 6 常见坑 ==================== -->
+<section id="s6" data-page-node-id="eRtEMiXCulODySk5hJBFuz">
+<h2 data-page-node-id="rWbVzG0Dd89773iqXTnB3X"><span class="num" data-page-node-id="Pz0JBxhJ1Q0jBRO5g8GYZ6">6</span>常见坑与驳回原因</h2>
+
+<p data-page-node-id="DytPkuoHcqUXVg6acIoFDE">这节是「别人踩过的坑合集」。申请前花 3 分钟看完，能省下几轮驳回。</p>
+
+<div class="grid2" data-page-node-id="Yz3IeTaMiuGHAxODMUUmZW">
+  <div class="mini bad" data-page-node-id="bhsGeLNkTCAsjGnKuEtdP5">
+    <div class="mh" data-page-node-id="uF53yfJ6UsGHN6HvfSTKVw">❌ 坑 1：应用用途填「自用比价工具」</div>
+    <div class="mb" data-page-node-id="BgRFV2FAWcsaA4JDKvrjfS">这是<b data-page-node-id="ICq1nBtdhuVGolTtWe7ozP">最高频驳回原因</b>。平台要的是「能带来流量的推广媒体」，「自用」等于告诉审核员「你不会给我带来任何推广价值」，直接拒。</div>
+  </div>
+  <div class="mini bad" data-page-node-id="Db110l5lnr8BGjfIyvfB8D">
+    <div class="mh" data-page-node-id="dT0enRWKvMMTDFc3CN3Fdd">❌ 坑 2：网站未备案 / 备案主体不符</div>
+    <div class="mb" data-page-node-id="OXgdx3Z5pV0aYR6hBCrAt5">京东「网站管理」、淘宝客「网站管理」都要 ICP 备案号。<b data-page-node-id="TlsCTbxxrRCzU3UcAsDbWm">备案主体不是本人/本公司时</b>，京东还要求上传营业执照 + 授权书。没备案就别选网站通道。</div>
+  </div>
+  <div class="mini bad" data-page-node-id="RbxDoQjq2XNjlccl6EeetK">
+    <div class="mh" data-page-node-id="nF0tKlrd5LZoUzQfmnRKqA">❌ 坑 3：回调地址不合规</div>
+    <div class="mb" data-page-node-id="Ssz9hoK6WbboZDp75bC00W">填 <code data-page-node-id="xmSEKM027ALUPI58hzxhYe">localhost</code> 有的平台接受、有的拒；填一个不存在的域名必拒。安全做法：填<b data-page-node-id="JZhwH6JgvDr1LajAGwNWRc">你能控制的 HTTPS 域名</b>，没有就用 <code data-page-node-id="d7EBSM8WqEFGyeGHBv3Wzm">http://localhost:5173/callback</code> 并接受可能需人工沟通。</div>
+  </div>
+  <div class="mini bad" data-page-node-id="nI9F8dGssF2tgNkFlBBbLI">
+    <div class="mh" data-page-node-id="ok6KGWWyOn6fBE6UHqtpyJ">❌ 坑 4：拼多多漏了「回多多进宝绑定」</div>
+    <div class="mb" data-page-node-id="IdNprPwgrXg0noQVtWVWhY">client_id 拿到了，但没去 jinbao.pinduoduo.com 的「API 权限」绑定 → 调用报权限错误。以为是 Key 错了，其实少一步。</div>
+  </div>
+  <div class="mini warn" data-page-node-id="uCOUE3Dxo2e1Gy9xEfRGSn">
+    <div class="mh" data-page-node-id="g48KN4b3YV0f9dFaJQRCEB">⚠ 坑 5：淘宝「应用标签」没申请就找「创建应用」</div>
+    <div class="mb" data-page-node-id="hjSBJBUIrqABeO6l6k4BcD">官方流程是<b data-page-node-id="LMxQMOmNcmsiepqB8t3bgk">先拿标签权限，再创建应用</b>。而且标签审核 5–7 个工作日。找不到创建入口时，先去看标签审核状态。</div>
+  </div>
+  <div class="mini warn" data-page-node-id="sThc0iOsPhaFrFAggVJKib">
+    <div class="mh" data-page-node-id="hWGPO41p6HXbkumjBQOKqW">⚠ 坑 6：淘宝应用 3 个月不上线会被删</div>
+    <div class="mb" data-page-node-id="SsfjDO7h8jrZBVXeWmMlvM">官方明示：未上线应用限流 5000 次/天，<b data-page-node-id="xVPVJnRT7IN8kofKGc4G3L">3 个月内未上线会被系统删除</b>。申请完记得回来用。</div>
+  </div>
+  <div class="mini warn" data-page-node-id="gum2pNysqZfyfOCUFGgj8w">
+    <div class="mh" data-page-node-id="1D3rHE04pZzs9VBTEibmuj">⚠ 坑 7：拿错值 —— Secret 当成 Key</div>
+    <div class="mb" data-page-node-id="Ou99b4E3FdE0t2lPXzW8eA">Key 是公开标识，Secret 是签名密钥。两者填反会报签名错误。京东的 key 是 32 位十六进制，别把 PID 当 Key。</div>
+  </div>
+  <div class="mini warn" data-page-node-id="Os6WALVATriL91BVYESonX">
+    <div class="mh" data-page-node-id="NEKFXzzsKGzH5fZfCBNZOt">⚠ 坑 8：个人主体拿不到某些权限</div>
+    <div class="mb" data-page-node-id="R89AeQQmwAaNnbDBDc9uuR">订单查询、结算类、部分高佣接口常需<b data-page-node-id="07Ys8phfj4EJbG5LRXdZp0">企业主体</b>。PriceHunter 用到的商品查询 + 券查询，个人主体够用。<b data-page-node-id="eBh1Mi0g92VkUXw7Ubzti7">超出范围就别硬申</b>，容易整号被风控。</div>
+  </div>
+  <div class="mini bad" data-page-node-id="4aEscXLggJKOTYKtL4k1Zw">
+    <div class="mh" data-page-node-id="JsjzVKExqL3TZHbcQmFc08">❌ 坑 9：把 Secret 提交到 Git</div>
+    <div class="mb" data-page-node-id="HyThK8sxsx3ROZRBymyLzz">Secret 泄露 = 你的 CPS 佣金被人盗用 + 应用被封。<b data-page-node-id="IDdGxC8mUHPa92BkHEB2sm">.env 必须在 .gitignore 里</b>，提交前确认一次。</div>
+  </div>
+  <div class="mini bad" data-page-node-id="EIZuhCl8Ekf85cUSWQ6oIF">
+    <div class="mh" data-page-node-id="jLwmtaQYcqJsAgIS6VLdQS">❌ 坑 10：找「代申请 / 代过审」</div>
+    <div class="mb" data-page-node-id="wfB0AW16s3zxAdeZY6dmLL">多为灰色渠道，用假资质批量注册，被查会<b data-page-node-id="69cW8aLK3wVGBch3Vxs5wo">连坐封号</b>，且你的实名信息在对方手里。不要碰。</div>
+  </div>
+</div>
+
+<h3 data-page-node-id="ScZedUmNYkFADs6k28FYsd">6.1 「应用用途」怎么写才容易过</h3>
+<div class="grid2" data-page-node-id="dNqokFrdPzrV7EsOkPVbGx">
+  <div class="mini ok" data-page-node-id="9kew1bFVbIC6zPTtUjuIRZ">
+    <div class="mh" data-page-node-id="411dcWBVLLWseCBek0ERF9">✅ 推荐写法</div>
+    <div class="mb" data-page-node-id="xyuUD4Ezds2mOz8vAg3O1q">「为自有导购工具（网页/小程序）提供京东 / 淘宝 / 拼多多商品的<b data-page-node-id="pc6nGdpBZatzPCtUlLEZq7">实时价格与优惠券查询</b>能力，用于向终端用户展示价格对比与可用券信息，帮助用户做出购买决策。」</div>
+  </div>
+  <div class="mini ok" data-page-node-id="zEFaM17CTCWASyxI3hoSD9">
+    <div class="mh" data-page-node-id="MfEaPdbbyEi6k4LD8VveJk">✅ 三个加分要素</div>
+    <div class="mb" data-page-node-id="jjhQfSqKYB7jECviP5kwSr">① <b data-page-node-id="UDKj2bkPR6zaE8ZHl3SwlI">有明确的载体</b>（网页 / 公众号 / 小程序 / 社群）；② <b data-page-node-id="37YkFPCA80ZgtAjB3yxRS4">有明确的受众</b>（终端消费者）；③ <b data-page-node-id="cbWqFPECNH114KRfCT5Hll">强调「查询与展示」</b>，不提批量采集、不提数据转售。</div>
+  </div>
+</div>
+<div class="note n-danger" style="margin-top:14px" data-page-node-id="OezhLhBtl43PrAmhrLdanS">
+  <span class="t" data-page-node-id="LXP882nEwYgkyHl7PGWFWs">这些词不要出现在用途说明里</span>
+  <p data-page-node-id="sVJB7o4IgtrD47HxnDZSGE"><b data-page-node-id="E9hgrdlfKIk9VYufGimpP5">自用 / 学习 / 测试 / 数据采集 / 爬取 / 批量 / 转售 / 内部使用 / 竞品分析 / 监控</b>。<br data-page-node-id="MqRsE13jx6uvkP96wo97Y9">
+  每一个都指向「你不会为平台带来推广价值」或「你在做数据搬运」，都是驳回高发词。</p>
+</div>
+</section>
+
+<!-- ==================== 7 合规 ==================== -->
+<section id="s7" data-page-node-id="cxG6yurh4ta8A8WdJCrgNk">
+<h2 data-page-node-id="oKSfDglQ365yY2eVnVm1Nx"><span class="num" data-page-node-id="AmTYeLNGrr2T6xrF4ho5yS">7</span>合规提醒（红线）</h2>
+
+<div class="note n-danger" data-page-node-id="eS9POJxufBKeKi6qGJRbnh">
+  <span class="t" data-page-node-id="vdkDkl6wKiiNxHCQVlH3sb">以下 5 条是硬约束，不是建议</span>
+  <ol style="margin:8px 0 0 20px" data-page-node-id="2zHoesHWDfyZIAGECpAzpQ">
+    <li data-page-node-id="gnIlGUsXjKpC8wuvTTp1E2"><b data-page-node-id="dzAPQj567e6ammc5tvRKL3">不得爬取。</b> 所有数据只能来自官方 CPS 联盟 API 或已授权的第三方 API。包括「用浏览器自动化打开商品页」也属灰色地带，本项目明确排除。</li>
+    <li data-page-node-id="YrzHhVPEypJpyknXBL6dHj"><b data-page-node-id="VrfUztoZ2ijLecHjSL3U8i">不得逆向 / 绕过鉴权。</b> 破解第三方接口的 token、签名算法，属于绕过技术保护措施，有明确法律风险。</li>
+    <li data-page-node-id="YpcSUutgY9AyQNXyGXuFcP"><b data-page-node-id="VMwyjGa9BLwCbfCl1oQpUq">不得超范围使用数据。</b> 申请时勾选了哪些接口，就只用哪些。用商品查询接口去批量刷全站数据属于超范围，会被收回权限。</li>
+    <li data-page-node-id="SPAyTU1RWIolNGeLEVzjKw"><b data-page-node-id="8FhmHBx1ShbOLlpEPPeSmy">不得长期缓存商品数据。</b> 多数联盟规范要求展示实时价格，禁止把商品库缓存下来当自己的数据库用。短期请求级缓存可以，长期落库不行（自建历史价只存价格数值与时间戳，且仅自用，不在此限）。</li>
+    <li data-page-node-id="hA15S02GEWgLA9m3itSHAy"><b data-page-node-id="6NAQcClH9aGBSeJHg4ZZeH">CPS 推广需遵守各平台规范。</b> 包括但不限于：不得虚假宣传、不得诱导点击、不得在未经许可的渠道投放、不得违规使用平台商标与logo。</li>
+  </ol>
+</div>
+
+<div class="note n-warn" data-page-node-id="E2r5OpKmqH0fShu6lDVKJ5">
+  <span class="t" data-page-node-id="6bWpiWy4cSn80I2moQj41K">密钥安全三条</span>
+  <ul style="margin:6px 0 0 20px" data-page-node-id="bjIuQwvkzWrSqX3ALgxn3k">
+    <li data-page-node-id="xG4VSrY7tYjiKIgtTgQHz5">Secret <b data-page-node-id="i5Ox5ybZbDdnTjT2gkt7UM">只存在于服务端 <code data-page-node-id="pzErnt04LwmcVtxWjUTUx7">.env</code></b>，不进前端 bundle、不进 Git、不进日志。</li>
+    <li data-page-node-id="LYdQPlfjF9zHo88XfKe0zG">确认项目 <code data-page-node-id="XHlCHaYAOt1aw4REXzGLzH">.gitignore</code> 含 <code data-page-node-id="EJiPWKcYsP4r7udeN124hQ">.env</code>。提交前跑一次 <code data-page-node-id="qG7qEnB96GGbL81QhzBR8Z">git status</code> 检查。</li>
+    <li data-page-node-id="fwyAkGzQEzZY2IIWrpMi0l">若怀疑泄露，<b data-page-node-id="RBqvWNlSLcWfHJ2Ak0a1Fj">立即到平台后台重置 Secret</b>，不要等。</li>
+  </ul>
+</div>
+
+<div class="note n-info" data-page-node-id="q7aKWHOOxKnukOPNA38po8">
+  <span class="t" data-page-node-id="JJeToe8sj2BYdx4YCLgT4S">关于「个人自用」的合规边界</span>
+  <p data-page-node-id="2vl4nM1BdWEEK1EfawjpjJ">如果你只给自己和家人用、不对外提供服务，各平台的规范约束相对宽松。但<b data-page-node-id="LjbC7C4XrJ7h4qBoqaUmcR">密钥的获取条件不会因此降低</b>——审核标准一样。一旦你把工具分享出去（哪怕只是发给朋友），就进入「推广行为」范畴，需遵守 CPS 规范。</p>
+</div>
+</section>
+
+<!-- ==================== 8 拿到 Key 之后 ==================== -->
+<section id="s8" data-page-node-id="iZBfaYrySe9xfhwkkJSqxF">
+<h2 data-page-node-id="ka4xJclpmNFTv7yZ6bS4jh"><span class="num" data-page-node-id="MDPJWLvKbVR45qumYPF9ja">8</span>拿到 Key 之后：配置 .env 并验证</h2>
+
+<h3 data-page-node-id="GEh72bqmxYN9IXBXFwTNpS">8.1 配置三步</h3>
+<ol class="steps" data-page-node-id="r0tkv08TWVGxQDXblfLvl0">
+  <li data-page-node-id="4ly4uYdV1U9P9iWFSHfiCC"><div class="sh" data-page-node-id="xK0yxKFC9Bb8bcbsMveBY0">复制环境变量模板</div><div class="sb" data-page-node-id="4WhRxQAF8DaHFkrjSmYbQb">在项目根目录执行：</div>
+<pre style="margin:8px 0 0" data-page-node-id="9Gc0mA3zcBG1QFghZyJWsH"><span class="c" data-page-node-id="FHEtFkIEuAGQK9FDRaWYL0"># 进入项目根目录</span>
+cd price-hunter
+
+<span class="c" data-page-node-id="sMeRL3GutAGcCEgd5Cp5dL"># 从模板生成 .env（Windows 用 copy）</span>
+<span class="g" data-page-node-id="93K757WhAszHSEwzcunz77">cp</span> .env.example .env</pre>
+  </li>
+  <li data-page-node-id="fdQX0tC6eV4yBNn8PJCiyt"><div class="sh" data-page-node-id="fHVFqmkjIGpSCdQP20dNLo">填入你拿到的值</div><div class="sb" data-page-node-id="KhbaUtrqmdonse2ZmMrR6Z">用任意文本编辑器打开 <code data-page-node-id="w3bmTDtlBaikWGYzot3yex">.env</code>，把第 2–5 节复制的值填进去。<b data-page-node-id="forpOeDCdhCd5aPJSxTsQh">不要加引号、不要留空格</b>：</div>
+<pre style="margin:8px 0 0" data-page-node-id="aGUb3fuPzFRrPAJGjHCmmb"><span class="c" data-page-node-id="JpfgByy7CO23IOhBHrYHG5"># ===== 京东联盟 =====</span>
+<span class="y" data-page-node-id="yacSIGDCodDMBDFVIFBcGU">JD_APP_KEY</span>=9f8b7c6d5e4a3b2c1d0e9f8a7b6c5d4e
+<span class="y" data-page-node-id="2ddkBuQitlOdvLzwJYXIlR">JD_APP_SECRET</span>=a1b2c3d4e5f60718293a4b5c6d7e8f90
+
+<span class="c" data-page-node-id="PmTcfH9pf14Q0ntLnyRJwH"># ===== 阿里妈妈淘宝客 =====</span>
+<span class="y" data-page-node-id="hv73PtJQPIHtMIb36Psxfv">TB_APP_KEY</span>=25xxxxxx
+<span class="y" data-page-node-id="VlSA4eNrZYV3WauWp65B9D">TB_APP_SECRET</span>=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+<span class="c" data-page-node-id="UBHjICBisPJGzQweyno428"># ===== 多多进宝 =====</span>
+<span class="y" data-page-node-id="UxPIRm4XEQBwgnpLZTrg0f">PDD_CLIENT_ID</span>=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6
+<span class="y" data-page-node-id="g6BHVr3EDwN1E46GaSD4ll">PDD_CLIENT_SECRET</span>=z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4
+
+<span class="c" data-page-node-id="zE6PhRoGnv6yUkFqRjjRjY"># ===== 历史价格 API（可留空，留空则降级 Mock）=====</span>
+<span class="y" data-page-node-id="t5cRAhvKzPgLd9OpPDypKG">HISTORY_API_BASE</span>=https://openapi.dataoke.com
+<span class="y" data-page-node-id="mik8Nc4LaqDIMzCWPkECKG">HISTORY_API_KEY</span>=你的历史价服务 Key</pre>
+  </li>
+  <li data-page-node-id="hZ6tKhLL8oE3PZwoTDFSa0"><div class="sh" data-page-node-id="9y5k5jBqMXyeGw4GouReUZ">重启服务</div><div class="sb" data-page-node-id="HANWPAM5whm1vHfupxdFrZ"><code data-page-node-id="JKY0jKKDwZflaAReIlBC49">.env</code> 只在服务启动时读取，<b data-page-node-id="vOCvGQdF5UpVCTtIwAX63b">改完必须重启</b>，热更新不生效：</div>
+<pre style="margin:8px 0 0" data-page-node-id="52xv0UJDEiEKZFxvOVL84y"><span class="c" data-page-node-id="orERN3Ps9GAl3XDucDDdpO"># 停掉当前进程（Ctrl + C），然后重新启动</span>
+<span class="g" data-page-node-id="YuYdpfS9JT7GjbB0WQEjOd">npm</span> run dev
+
+<span class="c" data-page-node-id="PAbS8ojSMfE7R8LUrXfSur"># 或按需只重启后端</span>
+<span class="g" data-page-node-id="YQi0nfi6g1Wbt9V2SfuKfk">npm</span> run dev:server</pre>
+  </li>
+</ol>
+
+<h3 data-page-node-id="Zj5nvGE9ikczZYOWxKGI6I">8.2 怎么判断成功了</h3>
+<div class="note n-ok" data-page-node-id="Nn4ISXpFAr8OlY6AlMR3Ez">
+  <span class="t" data-page-node-id="LFSxvItVN0sPccn3J6wEbE">✅ 成功标志：页面顶部「演示数据」横幅消失</span>
+  <p data-page-node-id="nG65wvGZ7qUe4vd3XaYO9n">未配置 Key 时，PriceHunter 会用 Mock 数据并在页面顶部显示显著的「<b data-page-node-id="fHeDUY1Ab1vCzAs8KxkXkf">演示数据</b>」横幅。填好 Key 并重启后，<b data-page-node-id="ca9P6TiBMCpLIdTtZOk5YI">这个横幅消失</b>即为切换到真实数据。</p>
+  <p style="margin-top:8px" data-page-node-id="uySm8qgqH4Ny7Si3FGCibM">若横幅仍在，说明该平台的 Key 未被识别 → 跳到第 8.4 节排查。</p>
+</div>
+
+<h3 data-page-node-id="3v1u0abFEKwgdOwvUZBOnL">8.3 可验证的测试链接</h3>
+<p data-page-node-id="1extJF5HoRRBk0NATywEwX">打开浏览器访问（端口以项目 README / 启动日志为准，常见前端 5173、后端 3000 或 3001）：</p>
+
+<div class="tw" data-page-node-id="6aUnyKQxqvYpXmGuuo1lvg">
+<table data-page-node-id="TB1ZoYTiPnIHHmKIBeilM6">
+<thead data-page-node-id="LavyELVOd3MzaqFM6TzLpd"><tr data-page-node-id="sAkDD2ULblFXqK4eFsrWv2"><th data-page-node-id="RR59kr7hx7MK52DeYbqX2T">用途</th><th data-page-node-id="veMmb9tsDfBSe8EOIKle2N">链接</th><th data-page-node-id="xYhOiJk5vypqhkMDL775S0">期望结果</th></tr></thead>
+<tbody data-page-node-id="SqwykRjBSW4P2QZftYP9A1">
+<tr data-page-node-id="8zabLZmsIrbWYxydGgBFJa"><td data-page-node-id="ys427tfflD0xzmy24o177q">健康检查</td><td data-page-node-id="D2BUhjGsyoUniFaaY2G6Zx"><code data-page-node-id="NzSjcGrwy2fpWc9ACCEJyp">http://localhost:3000/api/health</code></td><td data-page-node-id="W2BojGwl3o06fVrpGzZHR5">返回 <code data-page-node-id="ug0VhHevyHsi5rXXW8HnxZ">{"ok":true}</code> 及已配置平台列表</td></tr>
+<tr data-page-node-id="OuJA4aaduZvt99ecXXZoww"><td data-page-node-id="ikjJ0LbYyderwCRFZOJibE">京东比价测试</td><td data-page-node-id="YMAopoTfjRv30PAwjyYSWG"><code data-page-node-id="ifFE8G971A5gNMPgZcuigA">http://localhost:3000/api/parse?url=https://item.jd.com/100012043978.html</code></td><td data-page-node-id="MAwtaSxdMF74VoeH0Eg0Lw">返回 platformId=<code data-page-node-id="t8VU5DhcyHxHxA9qAqnOsp">jd</code> 且 <code data-page-node-id="MabuyfmEU5dllRYKVcsMef">isMock:false</code></td></tr>
+<tr data-page-node-id="QAdMI5UcXxGLxKHE0JZDhb"><td data-page-node-id="USN7i0V5SeZ0aDx45pvVpw">完整比价</td><td data-page-node-id="aJpLeL4K1wRwAHLL2DPHYG"><code data-page-node-id="v6wCHrf3st8BJYq6s1Z5H7">http://localhost:3000/api/compare?url=上面的京东链接</code></td><td data-page-node-id="TC2SEVcrxrqbp25i5DbY9r">返回各平台价格 + 券 + 最低价结论</td></tr>
+<tr data-page-node-id="mJEzk2Yu5gYctjRYuxNL5s"><td data-page-node-id="7ZwKZDUE35hcBSnW4lpt8f">历史价格</td><td data-page-node-id="lpM7ZAs4BhiAOkRxfHem2z"><code data-page-node-id="ZuNSGLyMMmsqkOe35jBspO">http://localhost:3000/api/history?url=上面的京东链接</code></td><td data-page-node-id="8SpzJGHltH5qcMP5881W6U">返回价格时序数组；未配 Key 时返回空态或 Mock</td></tr>
+<tr data-page-node-id="TrvAAVoYyYyCoryQFfcHQI"><td data-page-node-id="Ew76VPZnL6ManK9CaCTpJh">前端页面</td><td data-page-node-id="UDeCuEkOxApAJGOQHWFjfO"><code data-page-node-id="JEbzp0vZeHKZBqa3jwz9rO">http://localhost:5173</code></td><td data-page-node-id="kjNgynceavGe27GHqu37J7">粘贴链接 → 点「比价找券」→ 无「演示数据」横幅</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note n-info" data-page-node-id="JqENqNjURInOcqClYKG0CR">
+  <span class="t" data-page-node-id="XqVxP3s2jJTXnjg4LQGkjp">端口号不确定？</span>
+  <p data-page-node-id="fYODEYvoNPWkJgKihl51g5">以 <code data-page-node-id="8OAp1okvps5SQUqsto9uGU">npm run dev</code> 的<b data-page-node-id="nMHvTOXY3AzqQAbys85Wst">启动日志输出</b>为准（Vite 会打印 <code data-page-node-id="llcUHHGpkoXeUiQRvFgGk2">Local: http://localhost:5173/</code>；Express 端口写在 <code data-page-node-id="PXA1xhxa6vHdVJajZy2buD">server/</code> 配置里）。本教程给的 3000/5173 是常见默认值，<b data-page-node-id="VTvLLnsCTzSnlhOOW9nPkp">不是保证值</b>。</p>
+</div>
+
+<h3 data-page-node-id="9xsIYErF9oIL4P5DrDHaBX">8.4 排查清单</h3>
+<div class="tw" data-page-node-id="Q3ELKtXctUs8dCPVjsXl1n">
+<table data-page-node-id="KKBTIChv7bL2Qiwb948Edx">
+<thead data-page-node-id="itdUW0w5gQH9yUQ8iiMx7w"><tr data-page-node-id="5q72mAFazqNreHyDCqUg0Q"><th data-page-node-id="djzjsxMXDQqtBPjlHt2HeC">现象</th><th data-page-node-id="4pHTCt7rGVtQsb5Uvr0D4M">最可能的原因</th><th data-page-node-id="WofWgrCqYkzaLKsIhIYhRA">怎么办</th></tr></thead>
+<tbody data-page-node-id="nENcTc2r3cYVxxLGY1lWS2">
+<tr data-page-node-id="TTjX925bEw4NlcwCNkbAzb"><td data-page-node-id="X6yyVNmS2WNOaGO4EAqPGd">「演示数据」横幅还在</td><td data-page-node-id="aUdrmtwogbw0ghAVEgmAWR">① 改了 .env 没重启；② 变量名与 .env.example 不一致；③ 值前后有空格或引号</td><td data-page-node-id="JKqQOqb1ZDBFFNVHaRX0vv">重启 → 核对变量名 → 检查值两侧无空格无引号</td></tr>
+<tr data-page-node-id="6ivrEmt4lL6UpjniuOWVv9"><td data-page-node-id="AtC1PyOiJVZCrAiUuCXQnf">报「签名错误 / sign error」</td><td data-page-node-id="a8sQp0dCcJJxeHXkIIFWIc">Key 与 Secret 填反，或 Secret 复制不全</td><td data-page-node-id="4CGJYGi212ge2lWi70fNad">回平台后台重新复制完整值，注意别漏末位字符</td></tr>
+<tr data-page-node-id="poAPWTImpjfAJfwzWCja8g"><td data-page-node-id="LPmJnT7oP4Et8xzuSWUFAl">报「权限不足 / no permission」</td><td data-page-node-id="RxDPoEbpLbNCtfZGdHgiGp">接口权限未开通（尤其淘宝客基础 API、京东 goods.query）</td><td data-page-node-id="iGibHymNiTlal76T7C3ljH">回后台「API 权限 / 接口管理」页点申请</td></tr>
+<tr data-page-node-id="CPzolK79Xj8ABVtv8LEeb4"><td data-page-node-id="C9J9dh2HOlnuJb1xKDtrsP">拼多多报权限错误</td><td data-page-node-id="AIhFljoirJxGohi6r57KjH">未在 jinbao.pinduoduo.com 绑定 client_id</td><td data-page-node-id="REt1Cgk4vgtH1Uy5w9AWoV">回第 4 节第 7 步</td></tr>
+<tr data-page-node-id="YbfT6Aqjip4UslFM1EVhR7"><td data-page-node-id="I2DbQug46neuVErSJ35yIb">返回 429 / 限流</td><td data-page-node-id="09WutHHfocAmA2hD8npAjD">超调用频次</td><td data-page-node-id="34PcBmClFfU0rIvWYYqhuu">加本地缓存，降低查询频率</td></tr>
+<tr data-page-node-id="tahz9qpDkXCUpiJWaOtxSC"><td data-page-node-id="zdFrCFNfJ5DmFt4A9b4DpD">历史价格始终为空</td><td data-page-node-id="Q1dWjmeHLVebXGySFWdaX9">历史价是独立数据源，联盟 Key 与之无关</td><td data-page-node-id="b7Bbf7UqPhlBnEGJlR3sxv">回第 5 节；或先接受空态，用主流程</td></tr>
+<tr data-page-node-id="GaETDaLjPFB8jFGiUF3dC9"><td data-page-node-id="9dbiW7TE8BGTOWagih5jkB">本地能跑，部署后失败</td><td data-page-node-id="QJUUYnrnbBus6xHZp7CZOq">服务器环境变量未配置</td><td data-page-node-id="fkucyGbRZaZWXM75BpSN6X">在部署环境同样配置环境变量，不要上传 .env 文件</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ==================== 9 优先级 ==================== -->
+<section id="s9" data-page-node-id="5V4A4zx32VoAKrnpMu09Pt">
+<h2 data-page-node-id="0QJmEWlczXET5mXNMBEPkl"><span class="num" data-page-node-id="dIAJc31ExlxsW2BwpRziiM">9</span>申请优先级建议</h2>
+
+<p data-page-node-id="rXGCY61FWiyp9snSryLjeI">四家同时开，你会被四个不同的审核节奏拖住。按下面的顺序来，<b data-page-node-id="H4J5F5xAdLNBN5ysUzeKIE">最快当天就能看到真实数据</b>。</p>
+
+<ul class="road" data-page-node-id="y1eTRaQdcU8C5AxwCNYbyw">
+  <li data-page-node-id="B94KoLhuMFWVAkF2WspKPP">
+    <div class="rk" style="background:#15803d" data-page-node-id="KpvTxvuBP8Zr6SlHK2DAB9">1</div>
+    <div class="rb" data-page-node-id="0lpCfNJenydft0P9f9ctND">
+      <div class="rt" data-page-node-id="wBSATxBklOGZVe7BA3GfJp">多多进宝（先做，性价比最高）</div>
+      <div class="rd" data-page-node-id="Vrw4QaGpeoplsfRLbOMtpK">个人开发者可申请、应用审核快（多份资料称「秒过」）、<b data-page-node-id="7PCC59282qA7XmNKPX6Dq9">不需要备案域名</b>。唯一麻烦是要跨两个站点绑定，但照图 9 走一遍就好。<br data-page-node-id="bbNcGatJysOziyEq1WC8E8"><span class="tag t-easy" data-page-node-id="tqVGlvkFk3O5Uzxh0TqmpF">难度低</span> <span class="tag t-ok" data-page-node-id="q1XEkZVPzY42EqB9BPGxU6">当天可见效</span></div>
+    </div>
+  </li>
+  <li data-page-node-id="jX0dGZby05nwwxC1pcqkGs">
+    <div class="rk" style="background:#15803d" data-page-node-id="WbSpWd2QGyT7eWIq8gXerH">2</div>
+    <div class="rb" data-page-node-id="4qBbEJqihJ6muiMxx2z84N">
+      <div class="rt" data-page-node-id="7mwFTQFI69HUXIXL14Bbqy">京东联盟 · 导购媒体通道（第二个）</div>
+      <div class="rd" data-page-node-id="mNpm8zWIh0FHhyaYCv7WsI">走「导购媒体管理」<b data-page-node-id="m5aBQUpZGMcw2cntyw3vWb">不要备案域名</b>，门槛和多多进宝接近。京东商品的标准化程度高、价格接口稳定，是比价演示效果最好的一家。<br data-page-node-id="igt5qQjHZFP3eXstZrdy4R"><span class="tag t-easy" data-page-node-id="85SHZI5ia2VETUT5dIASNh">难度低</span> <span class="tag t-ok" data-page-node-id="bwFsO9qil7zRZyJ4L4ZClX">1–3 天</span></div>
+    </div>
+  </li>
+  <li data-page-node-id="bZ6ugd8VwjuOCrZcWN7Eks">
+    <div class="rk" style="background:#b45309" data-page-node-id="BxLXPb3c4N6KWqDIw2W4vw">3</div>
+    <div class="rb" data-page-node-id="xCkfkMHqOBB6AWEd31nBxq">
+      <div class="rt" data-page-node-id="2pyrhRAY88qjZ0ujBMQlp7">阿里妈妈淘宝客（今天就提交，然后放着等）</div>
+      <div class="rd" data-page-node-id="U1H6ngs0RJbOcBxtn5Z38S"><b data-page-node-id="Oqgr23JwCekYR6tIAKAyqk">应用标签审核要 5–7 个工作日，是全程最长的一环。</b>所以它应该<b data-page-node-id="GubwTnqb6RH1ZoDcFCxUvv">第一时间提交</b>，然后在等待期间去做 1、2、4。顺序上「最先提交，最后拿到」。<br data-page-node-id="IPaKj3V5V1IC02LElVOPEx"><span class="tag t-hard" data-page-node-id="p4zkrG12B4RZPxTl95S5gz">难度高</span> <span class="tag t-mid" data-page-node-id="aQg0ErC3SVMqlbvQqNC7Z9">5–7 个工作日</span></div>
+    </div>
+  </li>
+  <li data-page-node-id="zRiYjUjNwZ1HTk3vZExOXw">
+    <div class="rk" style="background:#6d28d9" data-page-node-id="maw8TJMZue6DY07jgk0sLC">4</div>
+    <div class="rb" data-page-node-id="GplUuvel5qKPevctMoIVAO">
+      <div class="rt" data-page-node-id="AimjLHbZ5Oz2euliud6dRo">历史价格 API（最后做，且允许做不出来）</div>
+      <div class="rd" data-page-node-id="xyNLPLjvw90dSeGQh3YlGC">这块不确定性最高（服务商政策、主体要求、付费门槛都未确认），<b data-page-node-id="umRerFHANp9zJLu2Ulj3Js">但不影响核心功能</b>。拿不到就先留空，页面照常出比价和优惠券，历史价模块走空态或自建库兜底。<br data-page-node-id="eYVG0bY2HM2CeeunEqAGlF"><span class="tag t-hard" data-page-node-id="9gdCvXzuxvOdROh0EUgt2b">难度高</span> <span class="tag t-no" data-page-node-id="RFgqRMPG6BDfDhtjAZEIbf">可延后</span></div>
+    </div>
+  </li>
+</ul>
+
+<div class="note n-ok" data-page-node-id="GWtpb8p7x1wsxp22GQta3B">
+  <span class="t" data-page-node-id="FqV0h0cyNLGeSz0HdOAArX">一句话执行顺序</span>
+  <p data-page-node-id="0fHipOUXzCoLwZlEzugcrC"><b data-page-node-id="gmCWBeAJDhpitQ9q2RZbze">今天</b>：提交淘宝客（因为最慢）→ 注册拼多多开放平台 → 注册京东联盟。<br data-page-node-id="uS4p72rwgQ2pJBUVV5Bj3G">
+  <b data-page-node-id="7RUF9frBxbaahIuzk5FzgF">明后两天</b>：跟着第 4、2 节的图走完多多进宝与京东，填进 .env，验证核心流程通了。<br data-page-node-id="3bPndrZTEAHzG36VHfFQUR">
+  <b data-page-node-id="wOY8RSHNwNFkfoGM6y2OOC">下周</b>：淘宝客标签审核下来后补填，再攻历史价格 API。</p>
+</div>
+
+<div class="note n-info" data-page-node-id="eC5sVW8fh8EOeS9cjnluEe">
+  <span class="t" data-page-node-id="K8gP2cGaBTQHHwpDkTo1FQ">只要 1、2 两家完成，PriceHunter 就已经是「真数据」了</span>
+  <p data-page-node-id="x0SzrVpUjdXqxGDQlkfU0D">不必等四个 Key 全齐才启动。架构上每个 Adapter 独立降级：<b data-page-node-id="rSiTPdiHvjEEKx3uaxpMO9">配了哪家就走哪家真实数据，没配的就 Mock 并在页面上标注</b>。先把两家跑通，比等四家齐了再一次性调试要稳得多。</p>
+</div>
+</section>
+
+<footer data-page-node-id="xOo7O8TtiDR3tLv5DjhenA">
+  <p data-page-node-id="7KJyBOLBCP88LvfrLrXimo"><b data-page-node-id="EXe2lnA4CP8GQYzl5kpLSp">PriceHunter · 联盟 API 密钥申请图文教程 v1.0</b>　|　核实时点：2026-09　|　配套纯文字版：<code data-page-node-id="2jFtB1EigqpGpctBjVUg1E">docs/api-key-guide.md</code></p>
+  <p data-page-node-id="gLnZCYxrwHzc2DDEfgHacC">本教程所有界面均为 <b data-page-node-id="UIeil6Ti4iNB6ZNPmmwiF0">HTML/CSS 绘制的示意图（mockup）</b>，用于标明按钮位置与操作顺序，非平台真实截图；实际页面以各平台官网为准。</p>
+  <p data-page-node-id="HxRXWIzkVorCQJfvAsvXR1">标注 <span class="tag t-gray" data-page-node-id="UiuJNrYFYgvjcuAfFSGc1D">未确认</span> 的条目，属于 2026-09 公开信息不足以定论之处，未做编造填充，请以官网当前页面为准。</p>
+  <p data-page-node-id="DJBudqHMtD0tzvCaQ6GdLV">密钥即资产：Secret 只进服务端 <code data-page-node-id="hCfYXcSbTFk4ZC0dsk329P">.env</code>，不进前端、不进 Git、不进日志。</p>
+</footer>
+
+</div>
+</body>
+</html>

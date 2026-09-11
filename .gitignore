@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.local
+server/.env
+*.log
+npm-debug.log*
+.DS_Store
+.vscode/
+.idea/
+vite.config.ts.timestamp-*
+server/data/
